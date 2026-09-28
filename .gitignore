@@ -1,0 +1,7 @@
+.vercel
+.env*
+site/
+site-old*/
+*.zip
+.claude/
+node_modules/

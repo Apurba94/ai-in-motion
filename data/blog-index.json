@@ -1,0 +1,1094 @@
+{
+ "what-is-artificial-intelligence": {
+  "title": "What Is Artificial Intelligence? A Rigorous Introduction",
+  "cat": "foundations"
+ },
+ "history-of-ai": {
+  "title": "A History of AI: From Turing to Transformers",
+  "cat": "foundations"
+ },
+ "turing-test-and-its-critics": {
+  "title": "The Turing Test and Its Critics",
+  "cat": "foundations"
+ },
+ "intelligent-agents-and-environments": {
+  "title": "Intelligent Agents, Environments and the PEAS Framework",
+  "cat": "foundations"
+ },
+ "uninformed-search-strategies": {
+  "title": "Uninformed Search: BFS, DFS, Uniform-Cost and Iterative Deepening",
+  "cat": "foundations"
+ },
+ "informed-search-a-star": {
+  "title": "Informed Search: Greedy Best-First and A* with Admissible Heuristics",
+  "cat": "foundations"
+ },
+ "adversarial-search-minimax-alpha-beta": {
+  "title": "Adversarial Search: Minimax and Alpha–Beta Pruning",
+  "cat": "foundations"
+ },
+ "constraint-satisfaction-problems": {
+  "title": "Constraint Satisfaction Problems: Backtracking, Propagation and Heuristics",
+  "cat": "foundations"
+ },
+ "propositional-logic-for-ai": {
+  "title": "Propositional Logic for AI: Syntax, Semantics and Inference",
+  "cat": "foundations"
+ },
+ "first-order-logic-and-inference": {
+  "title": "First-Order Logic: Objects, Relations, Quantifiers and Unification",
+  "cat": "foundations"
+ },
+ "knowledge-representation-ontologies": {
+  "title": "Knowledge Representation: Semantic Networks, Frames, Ontologies and Knowledge Graphs",
+  "cat": "foundations"
+ },
+ "expert-systems-rule-based-ai": {
+  "title": "Expert Systems and Rule-Based AI: Rise, Fall and Legacy",
+  "cat": "foundations"
+ },
+ "bayesian-networks": {
+  "title": "Bayesian Networks: Reasoning Under Uncertainty",
+  "cat": "foundations"
+ },
+ "hidden-markov-models": {
+  "title": "Hidden Markov Models: Filtering, Smoothing and the Viterbi Algorithm",
+  "cat": "foundations"
+ },
+ "classical-planning-strips": {
+  "title": "Classical Planning: STRIPS, PDDL and Planning Graphs",
+  "cat": "foundations"
+ },
+ "symbolic-vs-connectionist-ai": {
+  "title": "Symbolic vs Connectionist AI — and the Neuro-Symbolic Synthesis",
+  "cat": "foundations"
+ },
+ "local-search-hill-climbing-simulated-annealing": {
+  "title": "Local Search: Hill Climbing, Simulated Annealing and Beam Search",
+  "cat": "foundations"
+ },
+ "genetic-algorithms-evolutionary-computation": {
+  "title": "Genetic Algorithms and Evolutionary Computation",
+  "cat": "foundations"
+ },
+ "fuzzy-logic-systems": {
+  "title": "Fuzzy Logic: Reasoning with Degrees of Truth",
+  "cat": "foundations"
+ },
+ "monte-carlo-tree-search": {
+  "title": "Monte Carlo Tree Search: The Algorithm Behind Superhuman Go",
+  "cat": "foundations"
+ },
+ "decision-theory-and-utility": {
+  "title": "Decision Theory: Utility, Expected Value and the Value of Information",
+  "cat": "foundations"
+ },
+ "swarm-intelligence-pso-aco": {
+  "title": "Swarm Intelligence: Particle Swarm Optimisation and Ant Colony Optimisation",
+  "cat": "foundations"
+ },
+ "narrow-general-and-super-intelligence": {
+  "title": "Narrow AI, General AI and Superintelligence: Separating Science from Speculation",
+  "cat": "foundations"
+ },
+ "landscape-of-modern-ai": {
+  "title": "The Landscape of Modern AI: A Map for Students",
+  "cat": "foundations"
+ },
+ "why-mathematics-matters-for-ml": {
+  "title": "Why Mathematics Matters for Machine Learning",
+  "cat": "math"
+ },
+ "vectors-and-vector-spaces": {
+  "title": "Vectors and Vector Spaces: The Language of Data",
+  "cat": "math"
+ },
+ "matrices-and-linear-transformations": {
+  "title": "Matrices and Linear Transformations",
+  "cat": "math"
+ },
+ "eigenvalues-and-eigenvectors": {
+  "title": "Eigenvalues and Eigenvectors: The Natural Axes of a Transformation",
+  "cat": "math"
+ },
+ "singular-value-decomposition": {
+  "title": "Singular Value Decomposition: The Swiss Army Knife of Linear Algebra",
+  "cat": "math"
+ },
+ "norms-inner-products-and-distances": {
+  "title": "Norms, Inner Products, Projections and Distances",
+  "cat": "math"
+ },
+ "derivatives-gradients-chain-rule": {
+  "title": "Derivatives, Gradients and the Chain Rule",
+  "cat": "math"
+ },
+ "matrix-calculus-essentials": {
+  "title": "Matrix Calculus Essentials: Jacobians, Hessians and Vector Derivatives",
+  "cat": "math"
+ },
+ "probability-fundamentals": {
+  "title": "Probability Fundamentals: Sample Spaces, Axioms and Conditional Probability",
+  "cat": "math"
+ },
+ "random-variables-and-distributions": {
+  "title": "Random Variables and Probability Distributions",
+  "cat": "math"
+ },
+ "bayes-theorem-explained": {
+  "title": "Bayes' Theorem: Updating Beliefs with Evidence",
+  "cat": "math"
+ },
+ "expectation-variance-covariance": {
+  "title": "Expectation, Variance, Covariance and Correlation",
+  "cat": "math"
+ },
+ "gaussian-distribution-deep-dive": {
+  "title": "The Gaussian Distribution: Why It Is Everywhere",
+  "cat": "math"
+ },
+ "maximum-likelihood-estimation": {
+  "title": "Maximum Likelihood Estimation: How Models Learn from Data",
+  "cat": "math"
+ },
+ "map-estimation-and-priors": {
+  "title": "MAP Estimation, Priors and the Bayesian View of Regularisation",
+  "cat": "math"
+ },
+ "information-theory-entropy-kl": {
+  "title": "Information Theory for ML: Entropy, Cross-Entropy and KL Divergence",
+  "cat": "math"
+ },
+ "convex-optimization-basics": {
+  "title": "Convex Optimisation Basics: Why Some Problems Are Easy",
+  "cat": "math"
+ },
+ "gradient-descent-theory": {
+  "title": "Gradient Descent: Theory, Step Sizes and Convergence",
+  "cat": "math"
+ },
+ "lagrange-multipliers-constrained-optimization": {
+  "title": "Lagrange Multipliers and Constrained Optimisation (KKT Conditions)",
+  "cat": "math"
+ },
+ "statistical-hypothesis-testing-for-ml": {
+  "title": "Statistical Hypothesis Testing for ML: Is Model A Really Better?",
+  "cat": "math"
+ },
+ "sampling-and-monte-carlo-methods": {
+  "title": "Sampling and Monte Carlo Methods",
+  "cat": "math"
+ },
+ "markov-chains-for-ml": {
+  "title": "Markov Chains: Memoryless Processes and Stationary Distributions",
+  "cat": "math"
+ },
+ "numerical-stability-in-ml": {
+  "title": "Numerical Stability: Floating Point, Log-Sum-Exp and Avoiding NaNs",
+  "cat": "math"
+ },
+ "curse-of-dimensionality": {
+  "title": "The Curse of Dimensionality",
+  "cat": "math"
+ },
+ "tensors-and-tensor-operations": {
+  "title": "Tensors and Tensor Operations: Broadcasting, Reshaping and Einsum",
+  "cat": "math"
+ },
+ "what-is-machine-learning": {
+  "title": "What Is Machine Learning? The Learning Problem Formalised",
+  "cat": "machine-learning"
+ },
+ "types-of-machine-learning": {
+  "title": "Types of Machine Learning: Supervised, Unsupervised, Self-Supervised and Reinforcement",
+  "cat": "machine-learning"
+ },
+ "machine-learning-workflow": {
+  "title": "The Machine Learning Workflow: From Problem to Deployed Model",
+  "cat": "machine-learning"
+ },
+ "linear-regression-from-first-principles": {
+  "title": "Linear Regression from First Principles",
+  "cat": "machine-learning"
+ },
+ "polynomial-regression-basis-functions": {
+  "title": "Polynomial Regression and Basis Functions: Non-Linearity with Linear Models",
+  "cat": "machine-learning"
+ },
+ "regularization-ridge-lasso-elastic-net": {
+  "title": "Regularisation: Ridge, Lasso and Elastic Net",
+  "cat": "machine-learning"
+ },
+ "logistic-regression-explained": {
+  "title": "Logistic Regression: Probabilistic Classification Done Right",
+  "cat": "machine-learning"
+ },
+ "softmax-regression-multiclass": {
+  "title": "Softmax Regression and Multiclass Classification Strategies",
+  "cat": "machine-learning"
+ },
+ "bias-variance-tradeoff": {
+  "title": "The Bias–Variance Trade-off: Derivation and Intuition",
+  "cat": "machine-learning"
+ },
+ "overfitting-underfitting-learning-curves": {
+  "title": "Overfitting and Underfitting: Diagnosis with Learning Curves",
+  "cat": "machine-learning"
+ },
+ "train-validation-test-cross-validation": {
+  "title": "Train, Validation and Test Splits — and Cross-Validation Done Right",
+  "cat": "machine-learning"
+ },
+ "classification-metrics": {
+  "title": "Evaluation Metrics for Classification: Accuracy, Precision, Recall and F1",
+  "cat": "machine-learning"
+ },
+ "roc-auc-and-precision-recall-curves": {
+  "title": "ROC Curves, AUC and Precision–Recall Curves",
+  "cat": "machine-learning"
+ },
+ "regression-metrics": {
+  "title": "Regression Metrics: MSE, RMSE, MAE, R² and Beyond",
+  "cat": "machine-learning"
+ },
+ "k-nearest-neighbors": {
+  "title": "k-Nearest Neighbours: Learning by Similarity",
+  "cat": "machine-learning"
+ },
+ "naive-bayes-classifiers": {
+  "title": "Naive Bayes Classifiers: Simple, Fast and Surprisingly Strong",
+  "cat": "machine-learning"
+ },
+ "decision-trees": {
+  "title": "Decision Trees: Splitting Criteria, Pruning and Interpretability",
+  "cat": "machine-learning"
+ },
+ "bagging-and-bootstrap": {
+  "title": "Bagging and the Bootstrap: Variance Reduction by Averaging",
+  "cat": "machine-learning"
+ },
+ "random-forests": {
+  "title": "Random Forests: Decorrelated Trees and Robust Predictions",
+  "cat": "machine-learning"
+ },
+ "adaboost-explained": {
+  "title": "Boosting I: AdaBoost and the Power of Weak Learners",
+  "cat": "machine-learning"
+ },
+ "gradient-boosting-machines": {
+  "title": "Boosting II: Gradient Boosting Machines",
+  "cat": "machine-learning"
+ },
+ "xgboost-lightgbm-catboost": {
+  "title": "XGBoost, LightGBM and CatBoost: Modern Gradient Boosting Libraries",
+  "cat": "machine-learning"
+ },
+ "support-vector-machines": {
+  "title": "Support Vector Machines: Maximum-Margin Classification",
+  "cat": "machine-learning"
+ },
+ "kernel-methods-kernel-trick": {
+  "title": "Kernel Methods and the Kernel Trick",
+  "cat": "machine-learning"
+ },
+ "k-means-clustering": {
+  "title": "k-Means Clustering: Algorithm, Objective and Pitfalls",
+  "cat": "machine-learning"
+ },
+ "hierarchical-clustering": {
+  "title": "Hierarchical Clustering and Dendrograms",
+  "cat": "machine-learning"
+ },
+ "dbscan-density-clustering": {
+  "title": "DBSCAN and Density-Based Clustering",
+  "cat": "machine-learning"
+ },
+ "gaussian-mixture-models-em": {
+  "title": "Gaussian Mixture Models and the EM Algorithm",
+  "cat": "machine-learning"
+ },
+ "principal-component-analysis": {
+  "title": "Principal Component Analysis (PCA): Theory and Practice",
+  "cat": "machine-learning"
+ },
+ "tsne-and-umap": {
+  "title": "t-SNE and UMAP: Visualising High-Dimensional Data",
+  "cat": "machine-learning"
+ },
+ "linear-discriminant-analysis": {
+  "title": "Linear Discriminant Analysis: Supervised Dimensionality Reduction",
+  "cat": "machine-learning"
+ },
+ "feature-engineering": {
+  "title": "Feature Engineering: Turning Raw Data into Signal",
+  "cat": "machine-learning"
+ },
+ "feature-scaling-normalization": {
+  "title": "Feature Scaling and Normalisation: Standardisation, Min–Max and Robust Scaling",
+  "cat": "machine-learning"
+ },
+ "handling-missing-data": {
+  "title": "Handling Missing Data: Mechanisms, Imputation and Indicators",
+  "cat": "machine-learning"
+ },
+ "encoding-categorical-variables": {
+  "title": "Encoding Categorical Variables: One-Hot, Ordinal, Target and Beyond",
+  "cat": "machine-learning"
+ },
+ "imbalanced-data-techniques": {
+  "title": "Learning from Imbalanced Data",
+  "cat": "machine-learning"
+ },
+ "feature-selection-methods": {
+  "title": "Feature Selection: Filter, Wrapper and Embedded Methods",
+  "cat": "machine-learning"
+ },
+ "hyperparameter-tuning": {
+  "title": "Hyperparameter Tuning: Grid, Random, Bayesian and Early-Stopping Methods",
+  "cat": "machine-learning"
+ },
+ "anomaly-detection": {
+  "title": "Anomaly Detection: Finding the Unusual",
+  "cat": "machine-learning"
+ },
+ "ensemble-stacking-and-blending": {
+  "title": "Ensemble Learning III: Voting, Stacking and Blending",
+  "cat": "machine-learning"
+ },
+ "recommender-systems-collaborative-filtering": {
+  "title": "Recommender Systems I: Content-Based and Collaborative Filtering",
+  "cat": "machine-learning"
+ },
+ "matrix-factorization-recommendations": {
+  "title": "Recommender Systems II: Matrix Factorisation and Latent Factors",
+  "cat": "machine-learning"
+ },
+ "time-series-forecasting-arima": {
+  "title": "Time Series Forecasting: Stationarity, ARIMA and Evaluation",
+  "cat": "machine-learning"
+ },
+ "semi-supervised-learning": {
+  "title": "Semi-Supervised Learning: Learning from Few Labels and Many Unlabelled Examples",
+  "cat": "machine-learning"
+ },
+ "active-learning": {
+  "title": "Active Learning: Letting the Model Choose What to Label",
+  "cat": "machine-learning"
+ },
+ "learning-theory-pac-vc-dimension": {
+  "title": "Learning Theory: PAC Learning, VC Dimension and Generalisation Bounds",
+  "cat": "machine-learning"
+ },
+ "association-rule-mining-apriori": {
+  "title": "Association Rule Mining: Apriori, FP-Growth and Market-Basket Analysis",
+  "cat": "machine-learning"
+ },
+ "from-neurons-to-neural-networks": {
+  "title": "From Biological Neurons to Artificial Neural Networks",
+  "cat": "deep-learning"
+ },
+ "the-perceptron": {
+  "title": "The Perceptron: The First Learning Machine",
+  "cat": "deep-learning"
+ },
+ "multilayer-perceptrons-universal-approximation": {
+  "title": "Multilayer Perceptrons and the Universal Approximation Theorem",
+  "cat": "deep-learning"
+ },
+ "activation-functions": {
+  "title": "Activation Functions: Sigmoid, Tanh, ReLU, GELU, SwiGLU and Softmax",
+  "cat": "deep-learning"
+ },
+ "loss-functions-deep-learning": {
+  "title": "Loss Functions in Deep Learning: What Are We Really Optimising?",
+  "cat": "deep-learning"
+ },
+ "backpropagation-derived": {
+  "title": "Backpropagation Derived Step by Step",
+  "cat": "deep-learning"
+ },
+ "computational-graphs-autodiff": {
+  "title": "Computational Graphs and Automatic Differentiation",
+  "cat": "deep-learning"
+ },
+ "sgd-momentum-nesterov": {
+  "title": "Optimisers I: SGD, Momentum and Nesterov Acceleration",
+  "cat": "deep-learning"
+ },
+ "adaptive-optimizers-adam-adamw": {
+  "title": "Optimisers II: AdaGrad, RMSProp, Adam and AdamW",
+  "cat": "deep-learning"
+ },
+ "learning-rate-schedules-warmup": {
+  "title": "Learning Rate Schedules, Warm-up and the LR Range Test",
+  "cat": "deep-learning"
+ },
+ "weight-initialization": {
+  "title": "Weight Initialisation: Xavier, He and Why It Matters",
+  "cat": "deep-learning"
+ },
+ "vanishing-exploding-gradients": {
+  "title": "Vanishing and Exploding Gradients — Causes and Cures",
+  "cat": "deep-learning"
+ },
+ "batch-normalization": {
+  "title": "Batch Normalisation: Faster, More Stable Training",
+  "cat": "deep-learning"
+ },
+ "layer-norm-group-norm-rmsnorm": {
+  "title": "Beyond BatchNorm: Layer, Group, Instance and RMS Normalisation",
+  "cat": "deep-learning"
+ },
+ "dropout-regularization": {
+  "title": "Dropout: Regularisation by Random Deletion",
+  "cat": "deep-learning"
+ },
+ "regularization-in-deep-learning": {
+  "title": "Regularisation in Deep Learning: Weight Decay, Early Stopping, Augmentation and More",
+  "cat": "deep-learning"
+ },
+ "convolutional-neural-networks-intro": {
+  "title": "Convolutional Neural Networks: The Core Ideas",
+  "cat": "deep-learning"
+ },
+ "pooling-stride-padding": {
+  "title": "Padding, Stride, Pooling and Receptive Fields",
+  "cat": "deep-learning"
+ },
+ "recurrent-neural-networks": {
+  "title": "Recurrent Neural Networks: Modelling Sequences",
+  "cat": "deep-learning"
+ },
+ "lstm-networks": {
+  "title": "Long Short-Term Memory (LSTM): Gated Memory Explained",
+  "cat": "deep-learning"
+ },
+ "gru-gated-recurrent-units": {
+  "title": "Gated Recurrent Units (GRU) and Choosing a Recurrent Cell",
+  "cat": "deep-learning"
+ },
+ "sequence-to-sequence-models": {
+  "title": "Sequence-to-Sequence Models and the Encoder–Decoder Framework",
+  "cat": "deep-learning"
+ },
+ "attention-mechanism": {
+  "title": "The Attention Mechanism: Learning Where to Look",
+  "cat": "deep-learning"
+ },
+ "residual-connections-resnet-idea": {
+  "title": "Residual Connections: Why Very Deep Networks Became Trainable",
+  "cat": "deep-learning"
+ },
+ "autoencoders": {
+  "title": "Autoencoders: Compression, Denoising and Representation Learning",
+  "cat": "deep-learning"
+ },
+ "embeddings-explained": {
+  "title": "Embeddings: Turning Discrete Things into Meaningful Vectors",
+  "cat": "deep-learning"
+ },
+ "transfer-learning-fine-tuning": {
+  "title": "Transfer Learning and Fine-Tuning",
+  "cat": "deep-learning"
+ },
+ "pytorch-fundamentals": {
+  "title": "PyTorch Fundamentals: Tensors, Autograd, Modules and the Training Loop",
+  "cat": "deep-learning"
+ },
+ "tensorflow-keras-fundamentals": {
+  "title": "TensorFlow and Keras Fundamentals",
+  "cat": "deep-learning"
+ },
+ "debugging-neural-network-training": {
+  "title": "Debugging Neural Network Training: A Systematic Recipe",
+  "cat": "deep-learning"
+ },
+ "mixed-precision-training": {
+  "title": "Mixed-Precision Training and GPU Efficiency",
+  "cat": "deep-learning"
+ },
+ "distributed-training": {
+  "title": "Distributed Training: Data, Model, Pipeline and Sharded Parallelism",
+  "cat": "deep-learning"
+ },
+ "graph-neural-networks": {
+  "title": "Graph Neural Networks: Learning on Relational Data",
+  "cat": "deep-learning"
+ },
+ "knowledge-distillation": {
+  "title": "Knowledge Distillation: Teaching Small Models with Large Ones",
+  "cat": "deep-learning"
+ },
+ "pruning-and-quantization": {
+  "title": "Model Compression: Pruning and Quantisation",
+  "cat": "deep-learning"
+ },
+ "neural-architecture-search": {
+  "title": "Neural Architecture Search and Automated Machine Learning",
+  "cat": "deep-learning"
+ },
+ "double-descent-generalization": {
+  "title": "Double Descent and the Generalisation Mystery of Deep Learning",
+  "cat": "deep-learning"
+ },
+ "loss-landscapes": {
+  "title": "Loss Landscapes, Saddle Points and Flat Minima",
+  "cat": "deep-learning"
+ },
+ "introduction-to-computer-vision": {
+  "title": "Introduction to Computer Vision: From Pixels to Perception",
+  "cat": "computer-vision"
+ },
+ "image-processing-fundamentals": {
+  "title": "Image Processing Fundamentals: Filtering, Convolution and Edge Detection",
+  "cat": "computer-vision"
+ },
+ "classical-features-sift-hog": {
+  "title": "Classical Features: Harris Corners, SIFT, HOG and Bag of Visual Words",
+  "cat": "computer-vision"
+ },
+ "lenet-and-alexnet": {
+  "title": "LeNet and AlexNet: The Birth of Deep Vision",
+  "cat": "computer-vision"
+ },
+ "vgg-and-inception": {
+  "title": "VGG and GoogLeNet/Inception — Depth and Multi-Scale Design",
+  "cat": "computer-vision"
+ },
+ "resnet-architecture": {
+  "title": "ResNet in Depth: Architecture, Bottlenecks and Variants",
+  "cat": "computer-vision"
+ },
+ "efficientnet-and-model-scaling": {
+  "title": "EfficientNet and Principled Model Scaling",
+  "cat": "computer-vision"
+ },
+ "mobilenet-efficient-architectures": {
+  "title": "MobileNet and Efficient Architectures for Edge Devices",
+  "cat": "computer-vision"
+ },
+ "image-classification-pipeline": {
+  "title": "Building an Image Classification Pipeline End to End",
+  "cat": "computer-vision"
+ },
+ "data-augmentation-for-vision": {
+  "title": "Data Augmentation for Computer Vision",
+  "cat": "computer-vision"
+ },
+ "object-detection-rcnn-family": {
+  "title": "Object Detection I: R-CNN, Fast R-CNN and Faster R-CNN",
+  "cat": "computer-vision"
+ },
+ "yolo-real-time-detection": {
+  "title": "Object Detection II: YOLO and Real-Time Detection",
+  "cat": "computer-vision"
+ },
+ "ssd-retinanet-focal-loss": {
+  "title": "Object Detection III: SSD, RetinaNet and the Focal Loss",
+  "cat": "computer-vision"
+ },
+ "semantic-segmentation-fcn-unet": {
+  "title": "Semantic Segmentation: FCN, U-Net and DeepLab",
+  "cat": "computer-vision"
+ },
+ "instance-segmentation-mask-rcnn": {
+  "title": "Instance Segmentation: Mask R-CNN and Beyond",
+  "cat": "computer-vision"
+ },
+ "vision-transformers": {
+  "title": "Vision Transformers (ViT): Images as Sequences of Patches",
+  "cat": "computer-vision"
+ },
+ "self-supervised-vision-simclr-dino-mae": {
+  "title": "Self-Supervised Vision: SimCLR, MoCo, DINO and Masked Autoencoders",
+  "cat": "computer-vision"
+ },
+ "clip-vision-language": {
+  "title": "CLIP: Connecting Images and Language",
+  "cat": "computer-vision"
+ },
+ "human-pose-estimation": {
+  "title": "Human Pose Estimation",
+  "cat": "computer-vision"
+ },
+ "face-recognition-and-ethics": {
+  "title": "Face Recognition: Metric Learning, ArcFace and Responsible Use",
+  "cat": "computer-vision"
+ },
+ "video-understanding": {
+  "title": "Video Understanding: Action Recognition and Temporal Modelling",
+  "cat": "computer-vision"
+ },
+ "3d-vision-depth-nerf": {
+  "title": "3-D Vision: Stereo, Depth Estimation, Point Clouds and NeRF",
+  "cat": "computer-vision"
+ },
+ "ocr-and-document-ai": {
+  "title": "OCR and Document AI: From Scanned Forms to Structured Data",
+  "cat": "computer-vision"
+ },
+ "medical-imaging-ai": {
+  "title": "AI in Medical Imaging: Opportunities, Pitfalls and Validation",
+  "cat": "computer-vision"
+ },
+ "segment-anything-vision-foundation-models": {
+  "title": "Vision Foundation Models: Segment Anything and Promptable Vision",
+  "cat": "computer-vision"
+ },
+ "explainability-for-vision-grad-cam": {
+  "title": "Explaining Vision Models: Saliency Maps, Grad-CAM and Their Limits",
+  "cat": "computer-vision"
+ },
+ "adversarial-examples-robustness": {
+  "title": "Adversarial Examples: Fooling Neural Networks and Defending Them",
+  "cat": "computer-vision"
+ },
+ "introduction-to-nlp": {
+  "title": "Introduction to Natural Language Processing",
+  "cat": "nlp"
+ },
+ "text-preprocessing-tokenization": {
+  "title": "Text Preprocessing: Tokenisation, Normalisation, Stemming and Lemmatisation",
+  "cat": "nlp"
+ },
+ "bag-of-words-tf-idf": {
+  "title": "Bag of Words and TF-IDF: Classical Text Representation",
+  "cat": "nlp"
+ },
+ "n-gram-language-models": {
+  "title": "N-gram Language Models, Smoothing and Perplexity",
+  "cat": "nlp"
+ },
+ "word2vec-word-embeddings": {
+  "title": "Word2Vec: Learning Word Embeddings from Context",
+  "cat": "nlp"
+ },
+ "glove-fasttext-embeddings": {
+  "title": "GloVe and FastText: Global Statistics and Subword Embeddings",
+  "cat": "nlp"
+ },
+ "subword-tokenization-bpe-wordpiece": {
+  "title": "Subword Tokenisation: BPE, WordPiece, Unigram and SentencePiece",
+  "cat": "nlp"
+ },
+ "text-classification": {
+  "title": "Text Classification: From Linear Models to Fine-Tuned Transformers",
+  "cat": "nlp"
+ },
+ "sentiment-analysis": {
+  "title": "Sentiment Analysis: Opinions, Aspects and Nuance",
+  "cat": "nlp"
+ },
+ "named-entity-recognition": {
+  "title": "Named Entity Recognition: Finding People, Places and Organisations",
+  "cat": "nlp"
+ },
+ "pos-tagging-and-crf": {
+  "title": "Part-of-Speech Tagging and Conditional Random Fields",
+  "cat": "nlp"
+ },
+ "neural-machine-translation": {
+  "title": "Neural Machine Translation: From Seq2Seq to Multilingual Transformers",
+  "cat": "nlp"
+ },
+ "transformer-architecture-explained": {
+  "title": "The Transformer Architecture Explained, Block by Block",
+  "cat": "nlp"
+ },
+ "self-attention-in-depth": {
+  "title": "Self-Attention in Depth: Intuition, Complexity and Variants",
+  "cat": "nlp"
+ },
+ "positional-encodings-rope-alibi": {
+  "title": "Positional Encodings: Sinusoidal, Learned, RoPE and ALiBi",
+  "cat": "nlp"
+ },
+ "bert-explained": {
+  "title": "BERT: Bidirectional Encoder Representations from Transformers",
+  "cat": "nlp"
+ },
+ "gpt-family-autoregressive-models": {
+  "title": "The GPT Family: Autoregressive Language Models from GPT-1 to Today",
+  "cat": "nlp"
+ },
+ "t5-encoder-decoder-models": {
+  "title": "T5 and BART: Encoder–Decoder Pretraining and Text-to-Text Learning",
+  "cat": "nlp"
+ },
+ "fine-tuning-pretrained-language-models": {
+  "title": "Fine-Tuning Pretrained Language Models: A Practical Guide",
+  "cat": "nlp"
+ },
+ "question-answering-systems": {
+  "title": "Question Answering: Extractive, Open-Domain and Generative",
+  "cat": "nlp"
+ },
+ "text-summarization": {
+  "title": "Text Summarisation: Extractive and Abstractive Methods",
+  "cat": "nlp"
+ },
+ "nlp-evaluation-metrics": {
+  "title": "Evaluating NLP Systems: Perplexity, BLEU, ROUGE, BERTScore and Human Judgement",
+  "cat": "nlp"
+ },
+ "semantic-search-information-retrieval": {
+  "title": "Information Retrieval and Semantic Search",
+  "cat": "nlp"
+ },
+ "topic-modeling-lda": {
+  "title": "Topic Modelling: LDA, NMF and Neural Topic Models",
+  "cat": "nlp"
+ },
+ "multilingual-low-resource-nlp": {
+  "title": "Multilingual and Low-Resource NLP (with a Focus on Bangla)",
+  "cat": "nlp"
+ },
+ "dialogue-systems-chatbots": {
+  "title": "Dialogue Systems and Chatbots: From Rules to LLM Assistants",
+  "cat": "nlp"
+ },
+ "automatic-speech-recognition": {
+  "title": "Automatic Speech Recognition: From HMMs to Whisper",
+  "cat": "nlp"
+ },
+ "text-to-speech-synthesis": {
+  "title": "Text-to-Speech: From Concatenation to Neural Voices",
+  "cat": "nlp"
+ },
+ "efficient-transformers-long-context": {
+  "title": "Efficient Transformers: Sparse Attention, Linear Attention and FlashAttention",
+  "cat": "nlp"
+ },
+ "generative-vs-discriminative-models": {
+  "title": "Generative vs Discriminative Models: Learning to Create",
+  "cat": "generative-ai"
+ },
+ "variational-autoencoders": {
+  "title": "Variational Autoencoders: Probabilistic Latent Spaces",
+  "cat": "generative-ai"
+ },
+ "generative-adversarial-networks": {
+  "title": "Generative Adversarial Networks: The Generator–Discriminator Game",
+  "cat": "generative-ai"
+ },
+ "gan-variants-stylegan-cyclegan": {
+  "title": "GAN Variants: Conditional GANs, Pix2Pix, CycleGAN and StyleGAN",
+  "cat": "generative-ai"
+ },
+ "normalizing-flows": {
+  "title": "Normalising Flows: Exact Likelihood with Invertible Networks",
+  "cat": "generative-ai"
+ },
+ "diffusion-models": {
+  "title": "Diffusion Models: Generating by Learning to Denoise",
+  "cat": "generative-ai"
+ },
+ "latent-diffusion-stable-diffusion": {
+  "title": "Latent Diffusion and Stable Diffusion: Text-to-Image at Scale",
+  "cat": "generative-ai"
+ },
+ "classifier-free-guidance": {
+  "title": "Guidance in Diffusion Models: Classifier and Classifier-Free Guidance",
+  "cat": "generative-ai"
+ },
+ "large-language-models-overview": {
+  "title": "Large Language Models: What They Are and How They Are Built",
+  "cat": "generative-ai"
+ },
+ "scaling-laws": {
+  "title": "Scaling Laws: How Performance Grows with Compute, Data and Parameters",
+  "cat": "generative-ai"
+ },
+ "pretraining-llms-data-and-objectives": {
+  "title": "Pretraining LLMs: Data Pipelines, Objectives and Infrastructure",
+  "cat": "generative-ai"
+ },
+ "instruction-tuning": {
+  "title": "Instruction Tuning: Teaching Language Models to Follow Directions",
+  "cat": "generative-ai"
+ },
+ "rlhf-reinforcement-learning-human-feedback": {
+  "title": "RLHF: Reinforcement Learning from Human Feedback",
+  "cat": "generative-ai"
+ },
+ "dpo-preference-optimization": {
+  "title": "Direct Preference Optimisation (DPO) and Beyond",
+  "cat": "generative-ai"
+ },
+ "prompt-engineering": {
+  "title": "Prompt Engineering: Getting Reliable Results from LLMs",
+  "cat": "generative-ai"
+ },
+ "chain-of-thought-reasoning": {
+  "title": "Chain-of-Thought and Reasoning in Language Models",
+  "cat": "generative-ai"
+ },
+ "in-context-learning": {
+  "title": "In-Context Learning: How LLMs Learn from Prompts",
+  "cat": "generative-ai"
+ },
+ "retrieval-augmented-generation": {
+  "title": "Retrieval-Augmented Generation (RAG): Grounding LLMs in Your Documents",
+  "cat": "generative-ai"
+ },
+ "vector-databases": {
+  "title": "Vector Databases and Approximate Nearest Neighbour Search",
+  "cat": "generative-ai"
+ },
+ "lora-and-parameter-efficient-fine-tuning": {
+  "title": "LoRA and Parameter-Efficient Fine-Tuning (PEFT)",
+  "cat": "generative-ai"
+ },
+ "llm-quantization": {
+  "title": "Quantising Large Language Models for Efficient Inference",
+  "cat": "generative-ai"
+ },
+ "mixture-of-experts": {
+  "title": "Mixture of Experts: Scaling Parameters Without Scaling Compute",
+  "cat": "generative-ai"
+ },
+ "llm-inference-optimization": {
+  "title": "LLM Inference: KV Caching, Batching and Speculative Decoding",
+  "cat": "generative-ai"
+ },
+ "decoding-strategies-sampling": {
+  "title": "Decoding Strategies: Greedy, Beam Search, Temperature, Top-k and Top-p",
+  "cat": "generative-ai"
+ },
+ "llm-hallucination": {
+  "title": "Hallucination in LLMs: Causes, Detection and Mitigation",
+  "cat": "generative-ai"
+ },
+ "evaluating-llms-benchmarks": {
+  "title": "Evaluating Large Language Models: Benchmarks, Arenas and Custom Evals",
+  "cat": "generative-ai"
+ },
+ "ai-agents-tool-use": {
+  "title": "AI Agents and Tool Use: LLMs That Act",
+  "cat": "generative-ai"
+ },
+ "multimodal-models": {
+  "title": "Multimodal Models: Vision–Language and Beyond",
+  "cat": "generative-ai"
+ },
+ "text-to-image-and-video-generation": {
+  "title": "Text-to-Image and Text-to-Video Generation: Systems, Control and Provenance",
+  "cat": "generative-ai"
+ },
+ "building-llm-applications-end-to-end": {
+  "title": "Building an LLM Application End to End: From Idea to Production",
+  "cat": "generative-ai"
+ },
+ "introduction-to-reinforcement-learning": {
+  "title": "Introduction to Reinforcement Learning: Learning by Interaction",
+  "cat": "reinforcement-learning"
+ },
+ "markov-decision-processes": {
+  "title": "Markov Decision Processes: The Mathematical Framework of RL",
+  "cat": "reinforcement-learning"
+ },
+ "bellman-equations": {
+  "title": "The Bellman Equations: Recursive Structure of Value",
+  "cat": "reinforcement-learning"
+ },
+ "dynamic-programming-value-policy-iteration": {
+  "title": "Dynamic Programming: Policy Evaluation, Policy Iteration and Value Iteration",
+  "cat": "reinforcement-learning"
+ },
+ "monte-carlo-methods-rl": {
+  "title": "Monte Carlo Methods in Reinforcement Learning",
+  "cat": "reinforcement-learning"
+ },
+ "temporal-difference-learning": {
+  "title": "Temporal-Difference Learning: Learning from Guesses",
+  "cat": "reinforcement-learning"
+ },
+ "q-learning-and-sarsa": {
+  "title": "Q-Learning and SARSA: Model-Free Control",
+  "cat": "reinforcement-learning"
+ },
+ "multi-armed-bandits-exploration": {
+  "title": "Multi-Armed Bandits: The Exploration–Exploitation Dilemma",
+  "cat": "reinforcement-learning"
+ },
+ "function-approximation-rl": {
+  "title": "Function Approximation in RL: From Tables to Neural Networks",
+  "cat": "reinforcement-learning"
+ },
+ "deep-q-networks-dqn": {
+  "title": "Deep Q-Networks (DQN): Human-Level Atari from Pixels",
+  "cat": "reinforcement-learning"
+ },
+ "dqn-improvements-rainbow": {
+  "title": "Improving DQN: Double, Dueling, Prioritised Replay and Rainbow",
+  "cat": "reinforcement-learning"
+ },
+ "policy-gradients-reinforce": {
+  "title": "Policy Gradient Methods: REINFORCE and the Policy Gradient Theorem",
+  "cat": "reinforcement-learning"
+ },
+ "actor-critic-methods": {
+  "title": "Actor–Critic Methods: A2C, A3C and Advantage Estimation",
+  "cat": "reinforcement-learning"
+ },
+ "ppo-proximal-policy-optimization": {
+  "title": "PPO and TRPO: Stable Policy Optimisation with Trust Regions",
+  "cat": "reinforcement-learning"
+ },
+ "continuous-control-ddpg-td3-sac": {
+  "title": "Continuous Control: DDPG, TD3 and Soft Actor–Critic",
+  "cat": "reinforcement-learning"
+ },
+ "model-based-reinforcement-learning": {
+  "title": "Model-Based Reinforcement Learning: Learning and Planning with World Models",
+  "cat": "reinforcement-learning"
+ },
+ "alphago-alphazero": {
+  "title": "AlphaGo, AlphaZero and MuZero: Search Meets Deep Learning",
+  "cat": "reinforcement-learning"
+ },
+ "multi-agent-reinforcement-learning": {
+  "title": "Multi-Agent Reinforcement Learning: Cooperation, Competition and Equilibria",
+  "cat": "reinforcement-learning"
+ },
+ "imitation-learning-inverse-rl": {
+  "title": "Imitation Learning and Inverse Reinforcement Learning",
+  "cat": "reinforcement-learning"
+ },
+ "offline-reinforcement-learning": {
+  "title": "Offline Reinforcement Learning: Learning from Logged Data",
+  "cat": "reinforcement-learning"
+ },
+ "rl-in-the-real-world-robotics": {
+  "title": "Reinforcement Learning in the Real World: Robotics, Sim-to-Real and Safety",
+  "cat": "reinforcement-learning"
+ },
+ "what-is-mlops": {
+  "title": "What Is MLOps? From Notebook to Reliable Production System",
+  "cat": "mlops"
+ },
+ "data-versioning-and-pipelines": {
+  "title": "Data Versioning, Validation and Pipelines",
+  "cat": "mlops"
+ },
+ "experiment-tracking": {
+  "title": "Experiment Tracking: Never Lose a Result Again",
+  "cat": "mlops"
+ },
+ "reproducibility-in-ml": {
+  "title": "Reproducibility in Machine Learning",
+  "cat": "mlops"
+ },
+ "model-serving-and-apis": {
+  "title": "Model Serving: Batch, Real-Time APIs and Streaming",
+  "cat": "mlops"
+ },
+ "docker-for-machine-learning": {
+  "title": "Docker and Containers for Machine Learning",
+  "cat": "mlops"
+ },
+ "model-monitoring-and-drift": {
+  "title": "Model Monitoring: Detecting Data Drift and Concept Drift",
+  "cat": "mlops"
+ },
+ "ci-cd-for-machine-learning": {
+  "title": "CI/CD for Machine Learning: Testing and Automating ML Systems",
+  "cat": "mlops"
+ },
+ "feature-stores": {
+  "title": "Feature Stores and Training–Serving Consistency",
+  "cat": "mlops"
+ },
+ "edge-ai-tinyml": {
+  "title": "Edge AI and TinyML: Running Models on Phones and Microcontrollers",
+  "cat": "mlops"
+ },
+ "gpus-and-ml-hardware": {
+  "title": "GPUs and Hardware for Machine Learning",
+  "cat": "mlops"
+ },
+ "data-labeling-and-annotation": {
+  "title": "Data Labelling and Annotation: Building High-Quality Datasets",
+  "cat": "mlops"
+ },
+ "ab-testing-ml-models": {
+  "title": "A/B Testing and Online Evaluation of ML Models",
+  "cat": "mlops"
+ },
+ "ml-project-structure-clean-code": {
+  "title": "From Notebook to Production Code: Structuring Clean ML Projects",
+  "cat": "mlops"
+ },
+ "model-cards-and-documentation": {
+  "title": "Model Cards, Datasheets and Responsible Documentation",
+  "cat": "mlops"
+ },
+ "why-ai-ethics-matters": {
+  "title": "Why AI Ethics Matters: Principles for Responsible Engineers",
+  "cat": "ethics"
+ },
+ "bias-and-fairness-in-ml": {
+  "title": "Bias and Fairness in Machine Learning",
+  "cat": "ethics"
+ },
+ "fairness-metrics": {
+  "title": "Fairness Metrics: Demographic Parity, Equalised Odds and Calibration",
+  "cat": "ethics"
+ },
+ "explainable-ai-lime-shap": {
+  "title": "Explainable AI: LIME, SHAP and Interpretable Models",
+  "cat": "ethics"
+ },
+ "privacy-and-differential-privacy": {
+  "title": "Privacy in Machine Learning and Differential Privacy",
+  "cat": "ethics"
+ },
+ "federated-learning": {
+  "title": "Federated Learning: Training Without Centralising Data",
+  "cat": "ethics"
+ },
+ "ai-safety-and-alignment": {
+  "title": "AI Safety and Alignment: Making Capable Systems Do What We Intend",
+  "cat": "ethics"
+ },
+ "ai-security-threats": {
+  "title": "AI Security: Data Poisoning, Prompt Injection, Model Theft and Defences",
+  "cat": "ethics"
+ },
+ "ai-regulation-and-governance": {
+  "title": "AI Regulation and Governance: The EU AI Act and Beyond",
+  "cat": "ethics"
+ },
+ "ai-for-humanitarian-action": {
+  "title": "AI for Humanitarian Action and Social Good",
+  "cat": "ethics"
+ },
+ "deepfakes-and-misinformation": {
+  "title": "Deepfakes, Synthetic Media and Misinformation",
+  "cat": "ethics"
+ },
+ "environmental-cost-of-ai": {
+  "title": "The Environmental Cost of AI: Energy, Carbon and Water",
+  "cat": "ethics"
+ },
+ "ai-and-the-future-of-work": {
+  "title": "AI and the Future of Work",
+  "cat": "ethics"
+ },
+ "responsible-ai-in-education": {
+  "title": "Responsible AI in Education: Learning With, Not Instead Of, AI",
+  "cat": "ethics"
+ },
+ "careers-in-ai-roadmap": {
+  "title": "Careers in AI: A Roadmap for Students",
+  "cat": "ethics"
+ },
+ "how-to-read-an-ml-research-paper": {
+  "title": "How to Read a Machine Learning Research Paper",
+  "cat": "ethics"
+ },
+ "doing-ml-research-thesis-guide": {
+  "title": "Doing Machine Learning Research: A Guide for Your Thesis",
+  "cat": "ethics"
+ }
+}
