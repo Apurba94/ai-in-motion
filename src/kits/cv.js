@@ -33,7 +33,7 @@
       var a = g.E.out(g.seg(p, 0, .12)); g.img(img, 100, 180, 440, 440, { alpha: a });
       var path = [[4, 20], [12, 17], [22, 6], [9, 10]], pp = g.seg(p, .15, .9) * (path.length - 1), k = Math.min(path.length - 2, Math.floor(pp)), f = g.E.inOut(pp - k), zx = Math.round(g.lerp(path[k][0], path[k + 1][0], f)), zy = Math.round(g.lerp(path[k][1], path[k + 1][1], f)), Z = 6, cs = 440 / N;
       g.box(100 + zx * cs, 180 + zy * cs, Z * cs, Z * cs, { r: 2, stroke: g.C.amber, lw: 3, glow: g.C.amber });
-      var gx = 640, gy = 180, cz = 90; g.line(100 + (zx + Z) * cs, 180 + zy * cs, gx, gy, { color: g.hexA(g.C.amber, .5), lw: 1.5 }); g.line(100 + (zx + Z) * cs, 180 + (zy + Z) * cs, gx, gy + Z * cz, { color: g.hexA(g.C.amber, .5), lw: 1.5 });
+      var gx = 640, gy = 180, cz = 80; g.line(100 + (zx + Z) * cs, 180 + zy * cs, gx, gy, { color: g.hexA(g.C.amber, .5), lw: 1.5 }); g.line(100 + (zx + Z) * cs, 180 + (zy + Z) * cs, gx, gy + Z * cz, { color: g.hexA(g.C.amber, .5), lw: 1.5 });
       for (var yy = 0; yy < Z; yy++) for (var xx = 0; xx < Z; xx++) {
         var v = picture((zx + xx + .5) / N, (zy + yy + .5) / N), gray = Math.round(.299 * v[0] + .587 * v[1] + .114 * v[2]);
         g.ctx.fillStyle = 'rgb(' + v[0] + ',' + v[1] + ',' + v[2] + ')'; g.ctx.fillRect(gx + xx * cz, gy + yy * cz, cz - 3, cz - 3);
@@ -109,18 +109,18 @@
     draw: function (g, p, P, S, t) {
       g.heading(P.head || 'Inside a convolutional neural network', p, P.sub);
       var blocks = [['Input', '32×32×3', 150, 3, g.C.blue], ['Conv + ReLU', '32×32×16', 150, 9, g.C.cyan], ['Pool', '16×16×16', 90, 9, g.C.violet], ['Conv + ReLU', '16×16×32', 90, 14, g.C.cyan], ['Pool', '8×8×32', 55, 14, g.C.violet]];
-      var x = 80, ph = g.seg(p, .06, .9), packet = ph * (blocks.length + 2);
+      var x = 60, ph = g.seg(p, .06, .9), packet = ph * (blocks.length + 2);
       blocks.forEach(function (b, i) {
         var a = g.E.out(g.seg(ph, i * .1, .1 + i * .1)), s = b[2], d = b[3], cy = 420;
         for (var j = d - 1; j >= 0; j--) { var ox = x + j * 5, oy = cy - s / 2 - j * 4; g.box(ox, oy, s, s, { r: 4, fill: g.hexA(b[4], .12 + (j === 0 ? .25 : 0)), stroke: g.hexA(b[4], .7), lw: 1.2, alpha: a }); }
         g.text(b[0], x + s / 2 + d * 2.5, cy + s / 2 + 44, { size: 18, weight: 700, align: 'center', alpha: a, color: b[4] }); g.text(b[1], x + s / 2 + d * 2.5, cy + s / 2 + 70, { size: 16, mono: true, align: 'center', color: g.C.muted, alpha: a });
         if (packet > i && packet < i + 1) g.circle(x + s / 2, cy - 4, 10, { fill: g.C.amber, glow: g.C.amber });
-        x += s + d * 5 + 40;
+        x += s + d * 5 + 22;
       });
-      var fa = g.E.out(g.seg(ph, .55, .68)); for (var i = 0; i < 12; i++) g.box(x, 250 + i * 26, 22, 20, { r: 4, fill: g.hexA(g.C.amber, .6), alpha: fa }); g.text('Flatten', x + 11, 590, { size: 17, weight: 700, align: 'center', color: g.C.amber, alpha: fa }); x += 70;
-      var da = g.E.out(g.seg(ph, .68, .8)); for (i = 0; i < 6; i++) g.circle(x + 16, 290 + i * 45, 14, { fill: g.hexA(g.C.pink, .4), stroke: g.C.pink, alpha: da }); g.text('Dense', x + 16, 590, { size: 17, weight: 700, align: 'center', color: g.C.pink, alpha: da }); x += 70;
+      var fa = g.E.out(g.seg(ph, .55, .68)); for (var i = 0; i < 12; i++) g.box(x, 250 + i * 26, 22, 20, { r: 4, fill: g.hexA(g.C.amber, .6), alpha: fa }); g.text('Flatten', x + 11, 590, { size: 17, weight: 700, align: 'center', color: g.C.amber, alpha: fa }); x += 56;
+      var da = g.E.out(g.seg(ph, .68, .8)); for (i = 0; i < 6; i++) g.circle(x + 16, 290 + i * 45, 14, { fill: g.hexA(g.C.pink, .4), stroke: g.C.pink, alpha: da }); g.text('Dense', x + 16, 590, { size: 17, weight: 700, align: 'center', color: g.C.pink, alpha: da }); x += 56;
       var sa = g.E.out(g.seg(ph, .8, .95)), probs = P.probs || [['cat', .82], ['dog', .12], ['car', .06]];
-      probs.forEach(function (q, j) { g.text(q[0], x, 330 + j * 60, { size: 18, weight: 700, alpha: sa }); g.box(x + 50, 318 + j * 60, 110 * q[1] * sa, 24, { r: 6, fill: g.C.green }); g.text(Math.round(q[1] * 100) + '%', x + 58 + 110 * q[1], 331 + j * 60, { size: 15, mono: true, alpha: sa, color: g.C.muted }); });
+      probs.forEach(function (q, j) { g.text(q[0], x, 330 + j * 60, { size: 18, weight: 700, alpha: sa }); g.box(x + 50, 318 + j * 60, 90 * q[1] * sa, 24, { r: 6, fill: g.C.green }); g.text(Math.round(q[1] * 100) + '%', x + 58 + 90 * q[1], 331 + j * 60, { size: 15, mono: true, alpha: sa, color: g.C.muted }); });
       g.text('Softmax', x + 60, 590, { size: 17, weight: 700, align: 'center', color: g.C.green, alpha: sa });
       g.text('Spatial size shrinks while the number of feature channels grows.', 640, 675, { size: 20, align: 'center', color: g.C.muted, alpha: g.seg(ph, .3, .4) });
     }

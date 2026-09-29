@@ -47,7 +47,8 @@ const DEEP_MIN = 600; // every deep-dive lecture must run for at least 10 minute
 function load() {
   const lecs = [];
   for (const t of TRACKS) {
-    const list = require(path.join(ROOT, 'content', t.id + '.js'));
+    const deepFile = path.join(ROOT, 'content', t.id + '-deep.js'); // extra deep dives for an existing track
+    const list = require(path.join(ROOT, 'content', t.id + '.js')).concat(fs.existsSync(deepFile) ? require(deepFile) : []);
     list.forEach((l, k) => {
       if (l.track !== t.id) throw new Error(`${l.slug}: track mismatch`);
       l.accent = t.accent; l.n = k + 1; l.trackObj = t;
