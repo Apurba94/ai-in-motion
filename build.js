@@ -67,12 +67,19 @@ function load() {
   const seen = new Set(); lecs.forEach((l) => { if (seen.has(l.slug)) throw new Error('Duplicate slug ' + l.slug); seen.add(l.slug); });
   return lecs;
 }
-const lecData = (l) => ({ slug: l.slug, title: l.title, accent: l.accent, scenes: l.scenes });
+/* ---------- pre-rendered media (public/media, rendered from the same kits) ---------- */
+const hasPublic = (rel) => fs.existsSync(path.join(ROOT, 'public', rel));
+const num2 = (i) => String(i + 1).padStart(2, '0');
+const frameSrc = (slug, i) => `/media/frames/${slug}/${num2(i)}.webp`;
+const thumbSrc = (slug, i) => `/media/thumbs/${slug}/${num2(i)}.webp`;
+const hasFrames = (l) => hasPublic(`media/frames/${l.slug}/01.webp`);
+const hasThumbs = (l) => hasPublic(`media/thumbs/${l.slug}/01.webp`);
+const lecData = (l) => Object.assign({ slug: l.slug, title: l.title, accent: l.accent, scenes: l.scenes }, hasThumbs(l) ? { thumbs: `/media/thumbs/${l.slug}/` } : {});
 
 /* ---------- layout ---------- */
 const FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">';
 const credit = `© ${YEAR} ${SITE.author}, ${SITE.credentials} · ${SITE.role}, ${SITE.org}. All rights reserved.`;
-function layout({ title, desc, body, canonical = '/', extraHead = '', cls = '' }) {
+function layout({ title, desc, body, canonical = '/', extraHead = '', cls = '', image = '/media/og/home.jpg' }) {
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -83,6 +90,7 @@ function layout({ title, desc, body, canonical = '/', extraHead = '', cls = '' }
 <meta name="theme-color" content="#060a17">
 <link rel="canonical" href="${SITE.baseUrl}${canonical}">
 <meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:type" content="website"><meta property="og:url" content="${SITE.baseUrl}${canonical}">
+${hasPublic(image.slice(1)) ? `<meta property="og:image" content="${SITE.baseUrl}${image}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="${SITE.baseUrl}${image}">` : ''}
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 ${FONTS}
 <link rel="stylesheet" href="/assets/style.css?v=${V}">
@@ -128,7 +136,7 @@ function buildIndex(lecs) {
 <h1>See how AI <span class="grad">actually works.</span></h1>
 <p class="lead">${esc(SITE.tagline)} — every lesson is an animated video with narration, subtitles, chapters and a quiz. Short lessons explain one idea in minutes; deep dives of ten minutes or more take you from intuition to the maths and the code.</p>
 <div class="cta"><a class="btn btn-glow" href="/watch/what-is-artificial-intelligence.html"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Start watching</a><a class="btn btn-line" href="#library">Browse all lectures</a></div>
-<ul class="hero-feats"><li>🎙️ Voice narration</li><li>💬 Subtitles & transcripts</li><li>🧩 Chapters & quizzes</li><li>📚 Linked to ${SITE.blogName}</li></ul>
+<ul class="hero-feats"><li>🎙️ Voice narration</li><li>💬 Subtitles & transcripts</li><li>🧩 Chapters & quizzes</li><li>📄 Printable illustrated notes</li><li>📚 Linked to ${SITE.blogName}</li></ul>
 </div>
 <div class="hero-reel"><div class="reel-frame"><div id="reel"></div></div><p class="muted small center">Live preview — every frame is drawn in real time in your browser</p></div>
 </div>
@@ -149,8 +157,8 @@ function buildIndex(lecs) {
 }
 
 function buildLecture(l) {
-  const t = l.trackObj;
-  const chapters = l.scenes.map((s, i) => `<li><button type="button" data-seek="${i}"><span class="ts">${fmt(l.starts[i])}</span><span>${esc(s.chapter || 'Part ' + (i + 1))}</span></button></li>`).join('');
+  const t = l.trackObj, th = hasThumbs(l), fr = hasFrames(l);
+  const chapters = l.scenes.map((s, i) => `<li><button type="button" data-seek="${i}">${th ? `<img class="ch-thumb" src="${thumbSrc(l.slug, i)}" alt="" width="64" height="36" loading="lazy">` : ''}<span class="ts">${fmt(l.starts[i])}</span><span>${esc(s.chapter || 'Part ' + (i + 1))}</span></button></li>`).join('');
   const transcript = l.scenes.map((s, i) => `<p><button type="button" class="ts" data-seek="${i}">${fmt(l.starts[i])}</button> <b>${esc(s.chapter || '')}.</b> ${esc(s.say)}</p>`).join('');
   const quiz = l.quiz.map((q, i) => `<fieldset class="q" data-correct="${q.c}"><legend><span>Q${i + 1}</span> ${esc(q.q)}</legend>${q.a.map((a, j) => `<label><input type="radio" name="q${i}" value="${j}"><span>${esc(a)}</span></label>`).join('')}<p class="why" hidden>${esc(q.why)}</p></fieldset>`).join('');
   const reads = (l.read || []).map((r) => `<a class="read" href="${SITE.blog}/posts/${r}.html" target="_blank" rel="noopener"><span>📖</span><div><b>${esc(BLOG[r].title)}</b><small>${SITE.blogName} · full lecture</small></div><em>↗</em></a>`).join('');
@@ -160,10 +168,11 @@ function buildLecture(l) {
 <div class="watch-grid">
 <div class="watch-main">
 <div id="player" class="player-shell"></div>
-<noscript><p class="note">This animated lecture needs JavaScript. The full transcript is below.</p></noscript>
+<noscript>${fr ? `<img class="noscript-frame" src="${frameSrc(l.slug, l.poster)}" alt="${esc(l.title)}" width="1280" height="720">` : ''}<p class="note">This animated lecture needs JavaScript. The full transcript is below${fr ? `, and the <a href="/notes/${l.slug}.html">illustrated lecture notes</a> show every chapter as a picture` : ''}.</p></noscript>
 <h1>${esc(l.title)}</h1>
 <p class="meta"><span class="pill" style="--a:${l.accent}">${esc(t.name)}</span>${l.deep ? '<span class="pill deep-pill">Deep dive</span>' : ''}<span>${esc(l.level)}</span><span>${fmt(l.duration)}</span><span>${l.scenes.length} chapters</span></p>
 <p class="lead">${esc(l.summary)}</p>
+${fr ? `<p class="lec-actions"><a class="btn btn-line btn-sm" href="/notes/${l.slug}.html">📄 Illustrated notes · every chapter as a picture · printable</a></p>` : ''}
 <div class="kbd-help muted small">Shortcuts: <kbd>Space</kbd> play/pause · <kbd>←</kbd>/<kbd>→</kbd> 5 s · <kbd>N</kbd>/<kbd>P</kbd> chapter · <kbd>M</kbd> voice · <kbd>C</kbd> subtitles · <kbd>F</kbd> fullscreen</div>
 </div>
 <aside class="side">
@@ -180,14 +189,41 @@ function buildLecture(l) {
 </section>
 <script type="application/json" id="lecture-data">${json(lecData(l))}</script>`;
   const ld = { '@context': 'https://schema.org', '@type': 'LearningResource', name: l.title, description: l.summary, learningResourceType: 'Animated video lecture', educationalLevel: l.level, timeRequired: `PT${Math.ceil(l.duration / 60)}M`, inLanguage: 'en', author: { '@type': 'Person', name: SITE.author, url: SITE.portfolio }, isPartOf: { '@type': 'Course', name: SITE.name }, url: `${SITE.baseUrl}/watch/${l.slug}.html` };
-  writeFile(`watch/${l.slug}.html`, layout({ title: `${l.title} — ${SITE.name}`, desc: l.summary, body, canonical: `/watch/${l.slug}.html`, extraHead: `<script type="application/ld+json">${json(ld)}</script>`, cls: 'is-watch' }));
+  if (hasPublic(`media/og/${l.slug}.jpg`)) ld.image = `${SITE.baseUrl}/media/og/${l.slug}.jpg`;
+  writeFile(`watch/${l.slug}.html`, layout({ title: `${l.title} — ${SITE.name}`, desc: l.summary, body, canonical: `/watch/${l.slug}.html`, extraHead: `<script type="application/ld+json">${json(ld)}</script>`, cls: 'is-watch', image: `/media/og/${l.slug}.jpg` }));
+}
+
+/* ---------- illustrated, printable lecture notes ---------- */
+function buildNotes(l) {
+  if (!hasFrames(l)) return false;
+  const t = l.trackObj;
+  const chapters = l.scenes.map((s, i) => `<section class="note-ch"><h2><span class="ts">${fmt(l.starts[i])}</span><span>${i + 1}. ${esc(s.chapter || 'Part ' + (i + 1))}</span></h2><a href="/watch/${l.slug}.html#t=${Math.floor(l.starts[i])}" title="Watch this chapter"><img src="${frameSrc(l.slug, i)}" alt="${esc((s.chapter || 'Chapter ' + (i + 1)) + ' — ' + l.title)}" width="1280" height="720" loading="${i < 2 ? 'eager' : 'lazy'}" decoding="async"></a><p>${esc(s.say)}</p></section>`).join('');
+  const quiz = l.quiz.map((q) => `<li><b>${esc(q.q)}</b><details><summary>Show answer</summary><p>${esc(q.a[q.c])} — ${esc(q.why)}</p></details></li>`).join('');
+  const reads = (l.read || []).map((r) => `<li><a href="${SITE.blog}/posts/${r}.html" target="_blank" rel="noopener">${esc(BLOG[r].title)}</a> <span class="muted">· ${SITE.blogName}</span></li>`).join('');
+  const body = `
+<article class="notes wrap" style="--a:${l.accent}">
+<nav class="crumbs no-print"><a href="/">Home</a><span>/</span><a href="/tracks/${t.id}.html">${esc(t.name)}</a><span>/</span><a href="/watch/${l.slug}.html">Lecture ${l.n}</a><span>/</span><span>Notes</span></nav>
+<header class="notes-head">
+<p class="meta"><span class="pill" style="--a:${l.accent}">${esc(t.name)}</span>${l.deep ? '<span class="pill deep-pill">Deep dive</span>' : ''}<span>${esc(l.level)}</span><span>${fmt(l.duration)} video</span><span>${l.scenes.length} chapters</span></p>
+<h1>${esc(l.title)} <span class="muted">— lecture notes</span></h1>
+<p class="lead">${esc(l.summary)}</p>
+<div class="cta no-print"><a class="btn btn-glow" href="/watch/${l.slug}.html">▶ Watch the animated lecture</a><button class="btn btn-line" type="button" data-print>🖨 Print or save as PDF</button></div>
+</header>
+${chapters}
+<section class="panel"><h2>Key takeaways</h2><ul class="takeaways">${l.takeaways.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></section>
+<section class="panel"><h2>Check yourself</h2><ol class="notes-quiz">${quiz}</ol></section>
+<section class="panel"><h2>Go deeper</h2><ul class="notes-reads">${reads}</ul></section>
+<p class="muted small">${credit} Notes for the animated lecture at ${SITE.baseUrl}/watch/${l.slug}.html</p>
+</article>`;
+  writeFile(`notes/${l.slug}.html`, layout({ title: `${l.title} — illustrated notes — ${SITE.name}`, desc: `Illustrated, printable notes for the animated lecture “${l.title}”: every chapter as a picture with its narration, takeaways and quiz.`, body, canonical: `/notes/${l.slug}.html`, cls: 'is-notes', image: `/media/og/${l.slug}.jpg` }));
+  return true;
 }
 
 function buildTrack(t) {
   const body = `<section class="track-hero wrap" style="--a:${t.accent}"><nav class="crumbs"><a href="/">Home</a><span>/</span><span>Tracks</span></nav><span class="track-ic big">${t.icon}</span><h1>${t.name}</h1><p class="lead">${esc(t.blurb)}</p><p class="muted">${t.lectures.length} animated lectures · ${Math.round(t.lectures.reduce((a, l) => a + l.duration, 0) / 60)} minutes</p><a class="btn btn-glow" href="/watch/${t.lectures[0].slug}.html">▶ Start with lecture 1</a></section>
 <section class="wrap sec"><div class="grid">${t.lectures.map(card).join('')}</div></section>
 <script type="application/json" id="poster-data">${posterData(t.lectures)}</script>`;
-  writeFile(`tracks/${t.id}.html`, layout({ title: `${t.name} — ${SITE.name}`, desc: t.blurb, body, canonical: `/tracks/${t.id}.html` }));
+  writeFile(`tracks/${t.id}.html`, layout({ title: `${t.name} — ${SITE.name}`, desc: t.blurb, body, canonical: `/tracks/${t.id}.html`, image: `/media/og/track-${t.id}.jpg` }));
 }
 
 function buildAbout(lecs) {
@@ -210,14 +246,15 @@ function main() {
   ['site.js', 'style.css'].forEach((f) => writeFile('assets/' + f, fs.readFileSync(path.join(ROOT, 'src', f), 'utf8')));
   fs.copyFileSync(path.join(ROOT, 'src', 'favicon.svg'), path.join(OUT, 'favicon.svg'));
   buildIndex(lecs); lecs.forEach(buildLecture); TRACKS.forEach(buildTrack); buildAbout(lecs);
+  const noted = lecs.filter(buildNotes);
   writeFile('404.html', layout({ title: `Not found — ${SITE.name}`, desc: 'Page not found', canonical: '/404.html', body: `<section class="wrap nf"><span class="kicker">Error 404</span><h1>This scene is <span class="grad">missing</span>.</h1><p class="lead">The lecture you are looking for does not exist or has moved.</p><a class="btn btn-glow" href="/">Back to all lectures</a></section>` }));
-  const urls = ['/', '/about.html', ...TRACKS.map((t) => `/tracks/${t.id}.html`), ...lecs.map((l) => `/watch/${l.slug}.html`)];
+  const urls = ['/', '/about.html', ...TRACKS.map((t) => `/tracks/${t.id}.html`), ...lecs.map((l) => `/watch/${l.slug}.html`), ...noted.map((l) => `/notes/${l.slug}.html`)];
   writeFile('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${SITE.baseUrl}${u}</loc></url>`).join('\n')}\n</urlset>\n`);
   writeFile('robots.txt', `User-agent: *\nAllow: /\nSitemap: ${SITE.baseUrl}/sitemap.xml\n`);
   // Links for the companion blog: which animated lessons explain each written lecture
   const links = {}; lecs.forEach((l) => (l.read || []).forEach((r) => { (links[r] = links[r] || []).push({ title: l.title, url: `${SITE.baseUrl}/watch/${l.slug}.html`, minutes: Math.max(1, Math.round(l.duration / 60)) }); }));
   writeFile('blog-links.json', JSON.stringify(links, null, 1));
   const total = lecs.reduce((a, l) => a + l.duration, 0);
-  console.log(`Built ${lecs.length} animated lectures (${lecs.reduce((a, l) => a + l.scenes.length, 0)} scenes, ${fmt(total)} of animation, ${Object.keys(links).length} blog posts linked) in ${Date.now() - t0} ms`);
+  console.log(`Built ${lecs.length} animated lectures + ${noted.length} illustrated notes pages (${lecs.reduce((a, l) => a + l.scenes.length, 0)} scenes, ${fmt(total)} of animation, ${Object.keys(links).length} blog posts linked) in ${Date.now() - t0} ms`);
 }
 main();

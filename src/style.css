@@ -224,3 +224,32 @@ kbd { font: 700 .78em var(--mono); background: var(--panel2); border: 1px solid 
   .kbd-help { display: none; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+
+/* media: chapter thumbnails, seek preview, illustrated notes */
+.ch-thumb { width: 64px; height: 36px; border-radius: 6px; object-fit: cover; flex: none; background: #070b1c; border: 1px solid var(--line); }
+.mv-tip img { display: block; width: 160px; height: 90px; border-radius: 4px; margin: 0 auto 4px; background: #070b1c; }
+.mv-tip span { display: block; text-align: center; }
+.noscript-frame { width: 100%; height: auto; border-radius: 16px; margin-bottom: 10px; }
+.lec-actions { margin: 4px 0 10px; }
+.notes { max-width: 980px; padding: 28px 0 40px; }
+.notes-head h1 { font-size: clamp(1.9rem, 4vw, 2.9rem); margin: 14px 0 10px; }
+.notes-head h1 .muted { font-weight: 500; }
+.note-ch { margin: 38px 0; }
+.note-ch h2 { font-size: 1.22rem; display: flex; gap: 12px; align-items: baseline; margin-bottom: 10px; }
+.note-ch img { width: 100%; height: auto; display: block; border-radius: 16px; border: 1px solid var(--line); background: #070b1c; margin-bottom: 12px; }
+.note-ch p { color: #cfd5f0; font-size: 1.04rem; }
+.notes-quiz li, .notes-reads li { margin: 10px 0; }
+.notes-quiz details { color: var(--muted); margin-top: 4px; }
+.notes-quiz summary { cursor: pointer; color: var(--a, var(--cyan)); font-weight: 600; }
+@media print {
+  .top, .foot, .skip, .no-print { display: none !important; }
+  body { background: #fff !important; color: #111; }
+  .notes { max-width: none; width: 100%; padding: 0; }
+  .note-ch { break-inside: avoid; page-break-inside: avoid; margin: 18px 0; }
+  .note-ch p, .notes .lead, .takeaways li { color: #111; }
+  .note-ch img { border-color: #bbb; }
+  .panel { background: #fff; border-color: #bbb; break-inside: avoid; }
+  .notes-quiz details { display: block; } .notes-quiz details > * { display: block; }
+  a { color: #111; text-decoration: none; }
+  .pill { border: 1px solid #999; color: #111; background: none; }
+}

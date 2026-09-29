@@ -28,7 +28,11 @@
       shell.addEventListener('mv-scene', function rm() { box.remove(); shell.removeEventListener('mv-scene', rm); });
     });
     var quizSec = $('.quiz'); if (quizSec) quizSec.closest('section').id = 'quiz-anchor';
+    var hm = location.hash.match(/t=(\d+)/); if (hm) player.seek(+hm[1] + .05); // links from the illustrated notes
   }
+
+  /* print button on the illustrated notes pages */
+  $$('[data-print]').forEach(function (b) { b.addEventListener('click', function () { window.print(); }); });
 
   /* quiz */
   $$('.quiz').forEach(function (form) {

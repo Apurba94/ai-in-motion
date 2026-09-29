@@ -49,6 +49,13 @@ Each scene lasts as long as its narration (`say`, about 2.5 words per second, 5�
 
 Test every scene headlessly with `node test-kits.js content/ml.js` (or any other content file).
 
+## Media (about 81 MB, in `public/media/`)
+- `frames/<slug>/NN.webp`: a 1280 × 720 still of every chapter, rendered from the same kits. Used by the illustrated notes pages (`/notes/<slug>.html`, printable) and the no-JavaScript fallback.
+- `thumbs/<slug>/NN.webp`: 320 × 180 chapter thumbnails for the chapter list and the seek-bar preview.
+- `og/*.jpg`: 1200 × 630 social-sharing cards for every lecture, track and the home page.
+
+These are rendered in a browser from the kits. After you change a lecture's scenes, re-render that lecture's images, or the notes will show the old frames. Pages fall back gracefully if images for a lecture are missing.
+
 ## Publish
 Double-click **`publish.cmd`** (not "Run as administrator"). It builds, commits and pushes to GitHub, and then Vercel redeploys automatically.
 

@@ -220,7 +220,7 @@
       (minimal ? '' : '<button class="mv-big" type="button" aria-label="Play video">' + ICON.play + '</button><div class="mv-flash"></div>') + '</div>' +
       (minimal ? '' : '<div class="mv-bar"><div class="mv-track" role="slider" tabindex="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="' + Math.round(this.total) + '"><div class="mv-marks">' +
         this.starts.map(function (s) { return '<i style="left:' + (s / self.total * 100) + '%"></i>'; }).join('') +
-        '</div><div class="mv-fill"></div><div class="mv-knob"></div><div class="mv-tip"></div></div></div>' +
+        '</div><div class="mv-fill"></div><div class="mv-knob"></div><div class="mv-tip">' + (this.lec.thumbs ? '<img alt="" width="160" height="90">' : '') + '<span></span></div></div></div>' +
         '<div class="mv-ctrl"><button type="button" class="mv-btn mv-play" data-a="play" aria-label="Play or pause (K)">' + ICON.play + '</button>' +
         '<button type="button" class="mv-btn" data-a="prev" aria-label="Previous chapter">' + ICON.prev + '</button><button type="button" class="mv-btn" data-a="next" aria-label="Next chapter">' + ICON.next + '</button>' +
         '<span class="mv-time">0:00 / ' + fmt(this.total) + '</span><span class="mv-chap"></span>' +
@@ -230,7 +230,7 @@
         '<button type="button" class="mv-btn" data-a="full" aria-label="Fullscreen (F)">' + ICON.full + '</button></div>');
     this.stage = r.querySelector('.mv-stage'); this.canvas = r.querySelector('canvas'); this.ctx = this.canvas.getContext('2d'); this.g = makeG(this.ctx);
     this.cap = r.querySelector('.mv-cap'); this.big = r.querySelector('.mv-big'); this.flash = r.querySelector('.mv-flash');
-    this.track = r.querySelector('.mv-track'); this.fill = r.querySelector('.mv-fill'); this.knob = r.querySelector('.mv-knob'); this.tip = r.querySelector('.mv-tip');
+    this.track = r.querySelector('.mv-track'); this.fill = r.querySelector('.mv-fill'); this.knob = r.querySelector('.mv-knob'); this.tip = r.querySelector('.mv-tip'); this.tipText = this.tip && this.tip.querySelector('span'); this.tipImg = this.tip && this.tip.querySelector('img');
     this.timeEl = r.querySelector('.mv-time'); this.chapEl = r.querySelector('.mv-chap'); this.playBtn = r.querySelector('.mv-play');
     this.voiceBtn = r.querySelector('.mv-voice'); this.ccBtn = r.querySelector('.mv-cc'); this.speedBtn = r.querySelector('.mv-speed');
     this.updateButtons();
@@ -246,7 +246,8 @@
     this.track.addEventListener('pointerdown', function (e) { seeking = true; self.track.setPointerCapture(e.pointerId); self.seek(posToTime(e)); });
     this.track.addEventListener('pointermove', function (e) {
       var t = posToTime(e), i = self.sceneAt(t);
-      self.tip.textContent = fmt(t) + ' · ' + (self.scenes[i].chapter || 'Part ' + (i + 1)); self.tip.style.left = (t / self.total * 100) + '%';
+      self.tipText.textContent = fmt(t) + ' · ' + (self.scenes[i].chapter || 'Part ' + (i + 1)); self.tip.style.left = (t / self.total * 100) + '%';
+      if (self.tipImg) { var src = self.lec.thumbs + String(i + 1).padStart(2, '0') + '.webp'; if (self.tipImg.getAttribute('src') !== src) self.tipImg.setAttribute('src', src); }
       if (seeking) self.seek(t);
     });
     this.track.addEventListener('pointerup', function () { seeking = false; });
