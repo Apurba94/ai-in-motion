@@ -67,7 +67,7 @@ kbd { font: 700 .78em var(--mono); background: var(--panel2); border: 1px solid 
 .hero-reel p { margin-top: 12px; }
 
 /* tracks and cards */
-.tracks { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.tracks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .track { padding: 22px; border-radius: 20px; background: linear-gradient(160deg, color-mix(in srgb, var(--a) 14%, var(--panel)), var(--panel)); border: 1px solid var(--line); text-decoration: none; transition: transform .25s, border-color .25s; }
 .track:hover { transform: translateY(-5px); border-color: var(--a); }
 .track-ic { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 14px; background: color-mix(in srgb, var(--a) 22%, transparent); color: var(--a); font-size: 1.5rem; margin-bottom: 14px; box-shadow: 0 0 24px color-mix(in srgb, var(--a) 35%, transparent); }

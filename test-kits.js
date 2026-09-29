@@ -26,7 +26,7 @@ const ctxWin = { console: { log: console.log, warn() {}, error: (e) => { errors+
   document: { createElement: () => canvas(), fonts: null }, requestAnimationFrame() {}, CustomEvent: function () {}, speechSynthesis: null };
 ctxWin.window = ctxWin; vm.createContext(ctxWin);
 const src = path.join(__dirname, 'src');
-['engine.js', 'kits/general.js', 'kits/ai.js', 'kits/ml.js', 'kits/dl.js', 'kits/cv.js'].forEach(f => vm.runInContext(fs.readFileSync(path.join(src, f), 'utf8'), ctxWin, { filename: f }));
+['engine.js', 'kits/general.js', 'kits/ai.js', 'kits/ml.js', 'kits/dl.js', 'kits/cv.js', 'kits/nlp.js', 'kits/gen.js'].forEach(f => vm.runInContext(fs.readFileSync(path.join(src, f), 'utf8'), ctxWin, { filename: f }));
 const M = ctxWin.Motion;
 const lectures = process.argv[2] ? require(path.resolve(process.argv[2])) : null;
 

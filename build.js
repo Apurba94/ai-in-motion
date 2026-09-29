@@ -10,7 +10,7 @@ const path = require('path');
 
 const SITE = {
   name: 'AI in Motion',
-  tagline: 'Animated video lectures on Artificial Intelligence, Machine Learning, Deep Learning and Computer Vision',
+  tagline: 'Animated video lectures on Artificial Intelligence, Machine Learning, Deep Learning, Computer Vision, NLP and Generative AI',
   author: 'Janin A Apurba', credentials: 'CSE, AUST', role: 'Advanced ICT Officer', org: 'CNRS-UNHCR',
   baseUrl: 'https://ai-in-motion.vercel.app',
   blog: 'https://ai-lecture-hall.vercel.app', blogName: 'The AI Lecture Hall',
@@ -20,7 +20,9 @@ const TRACKS = [
   { id: 'ai', name: 'Artificial Intelligence', short: 'AI', accent: '#22d3ee', icon: '◎', blurb: 'Agents, search, games, optimisation, probability, language models, attention and image generation.' },
   { id: 'ml', name: 'Machine Learning', short: 'Machine Learning', accent: '#34d399', icon: '◈', blurb: 'Regression, gradient descent, classifiers, trees, SVMs, clustering, PCA, overfitting and evaluation.' },
   { id: 'dl', name: 'Deep Learning', short: 'Deep Learning', accent: '#f472b6', icon: '⬡', blurb: 'Neurons, networks, activations, training, backpropagation, optimisers, RNNs, embeddings, autoencoders and GANs.' },
-  { id: 'cv', name: 'Computer Vision', short: 'Computer Vision', accent: '#fbbf24', icon: '◐', blurb: 'Pixels, convolution, edges, CNNs, classic architectures, augmentation, detection, segmentation, ViTs and pose.' }
+  { id: 'cv', name: 'Computer Vision', short: 'Computer Vision', accent: '#fbbf24', icon: '◐', blurb: 'Pixels, convolution, edges, CNNs, classic architectures, augmentation, detection, segmentation, ViTs and pose.' },
+  { id: 'nlp', name: 'Natural Language Processing', short: 'NLP', accent: '#60a5fa', icon: '❝', blurb: 'Tokenization, TF-IDF, n-grams, word2vec, classification, NER, translation, positional encoding, BERT vs GPT, semantic search and speech.' },
+  { id: 'gen', name: 'Generative AI', short: 'Generative AI', accent: '#c084fc', icon: '✦', blurb: 'VAEs, diffusion, guidance, LLM training, decoding, prompting, RAG, LoRA, quantisation, mixture of experts, agents and multimodal models.' }
 ];
 const TR = Object.fromEntries(TRACKS.map((t) => [t.id, t]));
 const ROOT = __dirname, OUT = path.join(ROOT, 'site');
@@ -108,7 +110,7 @@ const posterData = (lecs) => json(Object.fromEntries(lecs.map((l) => [l.slug, { 
 
 /* ---------- pages ---------- */
 function buildIndex(lecs) {
-  const pick = ['a-star-search', 'neural-networks-forward-pass', 'k-means-clustering', 'object-detection', 'attention-and-transformers', 'convolution-and-image-filters', 'generative-adversarial-networks', 'principal-component-analysis', 'backpropagation', 'image-segmentation'];
+  const pick = ['a-star-search', 'neural-networks-forward-pass', 'retrieval-augmented-generation', 'k-means-clustering', 'object-detection', 'tokenization-and-subwords', 'attention-and-transformers', 'convolution-and-image-filters', 'decoding-temperature-and-top-p', 'generative-adversarial-networks', 'principal-component-analysis', 'mixture-of-experts', 'backpropagation', 'image-segmentation'];
   const reel = { slug: 'showreel', title: 'Showreel', accent: '#a78bfa', scenes: pick.map((s) => lecs.find((l) => l.slug === s)).filter(Boolean).map((l) => Object.assign({}, l.scenes[l.poster || 1], { dur: 7, say: l.title + '.', accent: l.accent })) };
   const total = lecs.reduce((a, l) => a + l.duration, 0);
   const body = `
@@ -135,7 +137,7 @@ function buildIndex(lecs) {
 </div></section>
 <script type="application/json" id="poster-data">${posterData(lecs)}</script>`;
   const ld = { '@context': 'https://schema.org', '@type': 'Course', name: SITE.name, description: SITE.tagline, provider: { '@type': 'Person', name: SITE.author, url: SITE.portfolio }, hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'online', courseWorkload: `PT${Math.round(total / 60)}M` } };
-  writeFile('index.html', layout({ title: `${SITE.name} — Animated lectures on AI, ML, Deep Learning & Computer Vision`, desc: `${lecs.length} animated video lectures with narration, subtitles and quizzes on AI, machine learning, deep learning and computer vision. By ${SITE.author}.`, body, extraHead: `<script type="application/ld+json">${json(ld)}</script>`, cls: 'home' }));
+  writeFile('index.html', layout({ title: `${SITE.name} — Animated lectures on AI, ML, Deep Learning, Computer Vision, NLP & Generative AI`, desc: `${lecs.length} animated video lectures with narration, subtitles and quizzes on AI, machine learning, deep learning, computer vision, NLP and generative AI. By ${SITE.author}.`, body, extraHead: `<script type="application/ld+json">${json(ld)}</script>`, cls: 'home' }));
 }
 
 function buildLecture(l) {
@@ -182,7 +184,7 @@ function buildTrack(t) {
 
 function buildAbout(lecs) {
   const body = `<section class="wrap about"><span class="kicker">About</span><h1>Learn AI by <span class="grad">watching it work</span></h1>
-<p class="lead">${SITE.name} is a collection of ${lecs.length} animated lectures on artificial intelligence, machine learning, deep learning and computer vision, created by <b>${esc(SITE.author)}</b> (${esc(SITE.credentials)}), currently ${esc(SITE.role)} at ${esc(SITE.org)}, teaching students.</p>
+<p class="lead">${SITE.name} is a collection of ${lecs.length} animated lectures on artificial intelligence, machine learning, deep learning, computer vision, natural language processing and generative AI, created by <b>${esc(SITE.author)}</b> (${esc(SITE.credentials)}), currently ${esc(SITE.role)} at ${esc(SITE.org)}, teaching students.</p>
 <p>Every animation is drawn live in your browser from real computations: the search algorithms really search, gradient descent really descends, k-means really clusters and the convolutions really convolve. The numbers you see on screen are the numbers the algorithms produce.</p>
 <p>Each video has optional spoken narration (using your browser’s built-in voice), subtitles, chapters, a transcript, key takeaways and a short quiz. For the full theory — derivations, code and exercises — every lecture links to the matching chapters of <a href="${SITE.blog}" target="_blank" rel="noopener">${SITE.blogName}</a>, a free course of 273 written lectures by the same author.</p>
 <div class="cta"><a class="btn btn-glow" href="/watch/what-is-artificial-intelligence.html">▶ Start watching</a><a class="btn btn-line" href="${SITE.portfolio}" target="_blank" rel="noopener">Author portfolio ↗</a></div>
@@ -195,7 +197,7 @@ function main() {
   fs.mkdirSync(OUT, { recursive: true }); clean(OUT);
   const lecs = load();
   copyDir(path.join(ROOT, 'public'), OUT);
-  const order = ['engine.js', 'kits/general.js', 'kits/ai.js', 'kits/ml.js', 'kits/dl.js', 'kits/cv.js'];
+  const order = ['engine.js', 'kits/general.js', 'kits/ai.js', 'kits/ml.js', 'kits/dl.js', 'kits/cv.js', 'kits/nlp.js', 'kits/gen.js'];
   writeFile('assets/motion.js', '/* AI in Motion — © ' + YEAR + ' Janin A Apurba, CSE, AUST */\n' + order.map((f) => fs.readFileSync(path.join(ROOT, 'src', f), 'utf8')).join('\n'));
   ['site.js', 'style.css'].forEach((f) => writeFile('assets/' + f, fs.readFileSync(path.join(ROOT, 'src', f), 'utf8')));
   fs.copyFileSync(path.join(ROOT, 'src', 'favicon.svg'), path.join(OUT, 'favicon.svg'));

@@ -159,6 +159,7 @@
       var parts = P.parts || [], n = parts.length, size = P.size || 60;
       g.heading(P.head || '', p, P.sub);
       var widths = parts.map(function (q) { return g.measure(q.t, { size: size, weight: 600, mono: true }); }), total = widths.reduce(function (a, b) { return a + b; }, 0);
+      if (total > 1140) { size = Math.floor(size * 1140 / total); widths = parts.map(function (q) { return g.measure(q.t, { size: size, weight: 600, mono: true }); }); total = widths.reduce(function (a, b) { return a + b; }, 0); } // shrink long formulas to fit
       var x = 640 - total / 2, y = P.y || 330, rev = g.seg(p, .05, .5) * n, notes = [];
       parts.forEach(function (q, k) {
         var a = g.E.out(g.clamp(rev - k)), c = col(g, q.c, k);

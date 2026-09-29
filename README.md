@@ -1,8 +1,8 @@
 # AI in Motion
 
-Animated video lectures on **Artificial Intelligence, Machine Learning, Deep Learning and Computer Vision**, by **Janin A Apurba** (CSE, AUST), Advanced ICT Officer at CNRS-UNHCR.
+Animated video lectures on **Artificial Intelligence, Machine Learning, Deep Learning, Computer Vision, Natural Language Processing and Generative AI**, by **Janin A Apurba** (CSE, AUST), Advanced ICT Officer at CNRS-UNHCR.
 
-- **Lectures:** 49 animated lectures (≈ 72 minutes), in 4 tracks.
+- **Lectures:** 74 animated lectures (≈ 106 minutes), in 6 tracks.
 - **In every lecture:**
   - animations drawn live on a canvas from real computations: the searches really search, gradient descent really descends and k-means really clusters;
   - optional spoken narration (browser speech), subtitles, chapters, a seek bar, speed control and fullscreen;
@@ -11,7 +11,7 @@ Animated video lectures on **Artificial Intelligence, Machine Learning, Deep Lea
 © Janin A Apurba, CSE, AUST · Advanced ICT Officer, CNRS-UNHCR. All rights reserved.
 
 ## Add or edit a lecture
-Lectures live in `content/ai.js`, `content/ml.js`, `content/dl.js` and `content/cv.js`. Each lecture is a list of scenes:
+Lectures live in `content/ai.js`, `ml.js`, `dl.js`, `cv.js`, `nlp.js` and `gen.js`. Each lecture is a list of scenes:
 
 ```js
 {
@@ -39,6 +39,8 @@ The length of each scene comes from its narration (`say`), or you can set `dur` 
 | Machine learning | scatter-fit, loss-curve, contour, classify-boundary, knn, tree-split, forest, svm, kmeans, pca, fit-compare, darts, split-folds, confusion, learning-curve |
 | Deep learning | neuron, network, activation, backprop-graph, gradient-flow, dropout, rnn, autoencoder, gan, train-loop, transfer |
 | Computer vision | pixels, convolve, edges, pooling, cnn-arch, features-hierarchy, classify, augment, detection, segment, vit, pose |
+| NLP | tokenize, bpe, bow-tfidf, ngram, skipgram, sentiment, ner, seq2seq, posenc, mask-compare, masked-lm, vector-search, spectrogram |
+| Generative AI | gen-disc, vae-latent, noise-schedule, cfg, scaling, rlhf, sampling, chat, rag, lora, quantize, moe, clip |
 
 Test every scene headlessly with `node test-kits.js content/ml.js`.
 
