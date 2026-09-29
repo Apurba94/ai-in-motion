@@ -191,7 +191,7 @@
       g.heading(P.head || 'Positional encodings', p, P.sub || 'Each position gets a unique pattern of sine and cosine waves');
       var cs = 11, x0 = 90, y0 = 180, reveal = g.seg(p, .05, .5) * S.P;
       for (var pos = 0; pos < S.P; pos++) { if (pos > reveal) break; for (var i = 0; i < S.D; i++) { var v = S.pe[pos][i]; g.ctx.fillStyle = v >= 0 ? g.hexA(g.C.amber, .1 + .85 * v) : g.hexA(g.C.blue, .1 + .85 * -v); g.ctx.fillRect(x0 + i * cs, y0 + pos * cs, cs - 1, cs - 1); } }
-      g.text('dimension →', x0, y0 - 16, { size: 15, color: g.C.muted }); g.text('position ↓', x0 - 10, y0 + S.P * cs + 20, { size: 15, color: g.C.muted });
+      g.text('dimension →', x0, y0 - 16, { size: 15, color: g.C.muted }); g.text('position ↓', x0 + 150, y0 - 16, { size: 15, color: g.C.muted });
       var hl = Math.floor(g.lerp(3, S.P - 5, g.seg(p, .55, .95))); if (p > .5) g.box(x0 - 3, y0 + hl * cs - 2, S.D * cs + 4, cs + 3, { r: 3, stroke: g.C.white, lw: 2 });
       var px = 560, py = 190, pw = 620; g.panel(px - 20, py - 20, pw + 40, 470);
       [[0, g.C.amber], [6, g.C.pink], [14, g.C.cyan]].forEach(function (d, k) { var f = 1 / Math.pow(10000, (2 * Math.floor(d[0] / 2)) / S.D), pts = []; for (var q = 0; q <= 47; q += .25) pts.push([px + q / 47 * pw, py + 70 + k * 140 - Math.sin(q * f) * 50]); g.path(pts, { color: d[1], lw: 3, p: g.seg(p, .2 + k * .1, .45 + k * .1) }); g.text('dim ' + d[0] + ': frequency ' + f.toFixed(3), px, py + 10 + k * 140, { size: 15, mono: true, color: d[1], alpha: g.seg(p, .2 + k * .1, .3 + k * .1) }); if (p > .5) g.circle(px + hl / 47 * pw, py + 70 + k * 140 - Math.sin(hl * f) * 50, 7, { fill: g.C.white, glow: d[1] }); });

@@ -126,8 +126,9 @@
     g.heading = function (s, p, sub) {
       var a = E.out(seg(p, 0, .12)), dx = (1 - a) * -30;
       g.box(56 + dx, 58, 6, 44, { r: 3, fill: C.cyan, alpha: a, glow: C.cyan });
-      g.text(s, 80 + dx, 80, { size: 40, weight: 700, head: true, alpha: a });
-      if (sub) g.text(sub, 82 + dx, 124, { size: 20, color: C.muted, alpha: E.out(seg(p, .05, .18)) });
+      var hs = Math.min(40, Math.floor(40 * 1120 / Math.max(1, g.measure(s, { size: 40, weight: 700, head: true })))), ss = sub ? Math.min(20, Math.floor(20 * 1120 / Math.max(1, g.measure(sub, { size: 20 })))) : 20;
+      g.text(s, 80 + dx, 80, { size: hs, weight: 700, head: true, alpha: a });
+      if (sub) g.text(sub, 82 + dx, 124, { size: ss, color: C.muted, alpha: E.out(seg(p, .05, .18)) });
     };
     g.panel = function (x, y, w, h, o) { o = o || {}; g.box(x, y, w, h, { r: o.r || 20, fill: o.fill || C.panel, stroke: o.stroke || 'rgba(120,140,220,.22)', lw: 1.5, alpha: o.alpha }); };
     g.img = function (canvas, x, y, w, h, o) { o = o || {}; ctx.save(); if (o.alpha != null) ctx.globalAlpha *= clamp(o.alpha); ctx.imageSmoothingEnabled = !!o.smooth; ctx.drawImage(canvas, x, y, w, h); ctx.restore(); };
@@ -163,7 +164,15 @@
   function kit(name, def) { KITS[name] = def; }
 
   /* ---------- timing ---------- */
-  function sentences(s) { var m = String(s || '').match(/[^.!?]+[.!?]+["')\]]*\s*|[^.!?]+$/g); return (m || []).map(function (x) { return x.trim(); }).filter(Boolean); }
+  function sentences(s) { // split after . ! ? only when followed by a space or the end, so numbers like 0.55 stay whole
+    s = String(s || ''); var out = [], cur = '';
+    for (var i = 0; i < s.length; i++) {
+      cur += s[i];
+      if (/[.!?]/.test(s[i])) { while (i + 1 < s.length && /["')\]’”]/.test(s[i + 1])) cur += s[++i]; if (i + 1 >= s.length || /\s/.test(s[i + 1])) { out.push(cur.trim()); cur = ''; } }
+    }
+    if (cur.trim()) out.push(cur.trim());
+    return out.filter(Boolean);
+  }
   function sceneDur(sc) { if (sc.dur) return sc.dur; var words = String(sc.say || '').split(/\s+/).filter(Boolean).length; return clamp(words / 2.55 + 1.6, 5, 24); }
   function fmt(t) { t = Math.max(0, Math.floor(t)); return Math.floor(t / 60) + ':' + ('0' + t % 60).slice(-2); }
 

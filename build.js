@@ -10,7 +10,7 @@ const path = require('path');
 
 const SITE = {
   name: 'AI in Motion',
-  tagline: 'Animated video lectures on Artificial Intelligence, Machine Learning, Deep Learning, Computer Vision, NLP and Generative AI',
+  tagline: 'Animated video lectures on AI, Machine Learning, Deep Learning, Computer Vision, NLP, Generative AI, LLMs, Reinforcement Learning, MLOps and the Mathematics of ML',
   author: 'Janin A Apurba', credentials: 'CSE, AUST', role: 'Advanced ICT Officer', org: 'CNRS-UNHCR',
   baseUrl: 'https://ai-in-motion.vercel.app',
   blog: 'https://ai-lecture-hall.vercel.app', blogName: 'The AI Lecture Hall',
@@ -18,12 +18,17 @@ const SITE = {
 };
 const TRACKS = [
   { id: 'ai', name: 'Artificial Intelligence', short: 'AI', accent: '#22d3ee', icon: '◎', blurb: 'Agents, search, games, optimisation, probability, language models, attention and image generation.' },
-  { id: 'ml', name: 'Machine Learning', short: 'Machine Learning', accent: '#34d399', icon: '◈', blurb: 'Regression, gradient descent, classifiers, trees, SVMs, clustering, PCA, overfitting and evaluation.' },
-  { id: 'dl', name: 'Deep Learning', short: 'Deep Learning', accent: '#f472b6', icon: '⬡', blurb: 'Neurons, networks, activations, training, backpropagation, optimisers, RNNs, embeddings, autoencoders and GANs.' },
-  { id: 'cv', name: 'Computer Vision', short: 'Computer Vision', accent: '#fbbf24', icon: '◐', blurb: 'Pixels, convolution, edges, CNNs, classic architectures, augmentation, detection, segmentation, ViTs and pose.' },
+  { id: 'ml', name: 'Machine Learning', short: 'ML', accent: '#34d399', icon: '◈', blurb: 'Regression, gradient descent, classifiers, trees, SVMs, clustering, PCA, overfitting and evaluation.' },
+  { id: 'dl', name: 'Deep Learning', short: 'DL', accent: '#f472b6', icon: '⬡', blurb: 'Neurons, networks, activations, training, backpropagation, optimisers, RNNs, embeddings, autoencoders and GANs.' },
+  { id: 'cv', name: 'Computer Vision', short: 'CV', accent: '#fbbf24', icon: '◐', blurb: 'Pixels, convolution, edges, CNNs, classic architectures, augmentation, detection, segmentation, ViTs and pose.' },
   { id: 'nlp', name: 'Natural Language Processing', short: 'NLP', accent: '#60a5fa', icon: '❝', blurb: 'Tokenization, TF-IDF, n-grams, word2vec, classification, NER, translation, positional encoding, BERT vs GPT, semantic search and speech.' },
-  { id: 'gen', name: 'Generative AI', short: 'Generative AI', accent: '#c084fc', icon: '✦', blurb: 'VAEs, diffusion, guidance, LLM training, decoding, prompting, RAG, LoRA, quantisation, mixture of experts, agents and multimodal models.' }
+  { id: 'gen', name: 'Generative AI', short: 'GenAI', accent: '#c084fc', icon: '✦', blurb: 'VAEs, diffusion, guidance, LLM training, decoding, prompting, RAG, LoRA, quantisation, mixture of experts, agents and multimodal models.' },
+  { id: 'llm', name: 'Large Language Models', short: 'LLMs', accent: '#f87171', icon: '❖', blurb: 'Deep dives into transformer internals, attention maths, pre-training at scale, alignment (SFT, RLHF, DPO), inference engineering and building LLM applications.' },
+  { id: 'rl', name: 'Reinforcement Learning', short: 'RL', accent: '#fb923c', icon: '♞', blurb: 'MDPs and returns, value and policy iteration, Monte Carlo and TD learning, Q-learning vs SARSA, bandits, deep Q-networks, policy gradients and PPO.' },
+  { id: 'mlops', name: 'MLOps & Engineering', short: 'MLOps', accent: '#a3e635', icon: '⚙', blurb: 'The ML lifecycle, data and experiment management, Docker and model serving, CI/CD and deployment strategies, monitoring and drift, A/B testing and responsible operations.' },
+  { id: 'math', name: 'Mathematics for ML', short: 'Math', accent: '#818cf8', icon: '∑', blurb: 'Vectors and dot products, matrices as transformations, eigenvectors, SVD and PCA, calculus and gradients, probability, likelihood and information theory.' }
 ];
+for (let i = TRACKS.length - 1; i >= 0; i--) if (!fs.existsSync(path.join(__dirname, 'content', TRACKS[i].id + '.js'))) TRACKS.splice(i, 1); // tracks without content are skipped
 const TR = Object.fromEntries(TRACKS.map((t) => [t.id, t]));
 const ROOT = __dirname, OUT = path.join(ROOT, 'site');
 const YEAR = new Date().getFullYear(), V = Date.now().toString(36);
@@ -36,6 +41,7 @@ function clean(p) { if (!fs.existsSync(p)) return; for (const e of fs.readdirSyn
 function copyDir(src, dst) { if (!fs.existsSync(src)) return; fs.mkdirSync(dst, { recursive: true }); for (const e of fs.readdirSync(src, { withFileTypes: true })) { const s = path.join(src, e.name), d = path.join(dst, e.name); e.isDirectory() ? copyDir(s, d) : fs.copyFileSync(s, d); } }
 const sceneDur = (s) => s.dur || Math.max(5, Math.min(24, String(s.say || '').split(/\s+/).filter(Boolean).length / 2.55 + 1.6));
 const fmt = (t) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, '0')}`;
+const DEEP_MIN = 600; // every deep-dive lecture must run for at least 10 minutes
 
 /* ---------- load lectures ---------- */
 function load() {
@@ -45,10 +51,11 @@ function load() {
     list.forEach((l, k) => {
       if (l.track !== t.id) throw new Error(`${l.slug}: track mismatch`);
       l.accent = t.accent; l.n = k + 1; l.trackObj = t;
-      const PLAIN = ['title', 'bullets', 'compare', 'definition', 'equation', 'pipeline', 'cycle'];
+      const PLAIN = ['title', 'bullets', 'compare', 'definition', 'equation', 'pipeline', 'cycle', 'code', 'table', 'question', 'stats'];
       const rich = l.scenes.findIndex((s) => !PLAIN.includes(s.kit));
       l.poster = rich >= 0 ? rich : (l.poster || 0);
       l.duration = l.scenes.reduce((a, s) => a + sceneDur(s), 0);
+      if (l.deep && l.duration < DEEP_MIN) throw new Error(`${l.slug}: deep dive runs only ${fmt(l.duration)} (minimum ${fmt(DEEP_MIN)})`);
       l.starts = []; let acc = 0; l.scenes.forEach((s) => { l.starts.push(acc); acc += sceneDur(s); });
       (l.read || []).forEach((r) => { if (!BLOG[r]) throw new Error(`${l.slug}: unknown blog post ${r}`); });
       lecs.push(l);
@@ -102,23 +109,23 @@ ${extraHead}
 }
 
 function card(l) {
-  return `<a class="card" href="/watch/${l.slug}.html" style="--a:${l.accent}" data-track="${l.track}" data-q="${esc((l.title + ' ' + l.summary + ' ' + l.trackObj.name).toLowerCase())}">
-<div class="thumb"><canvas data-poster="${l.slug}" aria-hidden="true"></canvas><span class="dur">${fmt(l.duration)}</span><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
-<div class="card-body"><span class="card-track">${esc(l.trackObj.name)} · ${String(l.n).padStart(2, '0')}</span><h3>${esc(l.title)}</h3><p>${esc(l.summary)}</p><span class="card-meta">${esc(l.level)} · ${l.scenes.length} chapters · quiz</span></div></a>`;
+  return `<a class="card${l.deep ? ' is-deep' : ''}" href="/watch/${l.slug}.html" style="--a:${l.accent}" data-track="${l.track}"${l.deep ? ' data-deep="1"' : ''} data-q="${esc((l.title + ' ' + l.summary + ' ' + l.trackObj.name).toLowerCase())}">
+<div class="thumb"><canvas data-poster="${l.slug}" aria-hidden="true"></canvas>${l.deep ? '<span class="deep-badge">Deep dive</span>' : ''}<span class="dur">${fmt(l.duration)}</span><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span></div>
+<div class="card-body"><span class="card-track">${esc(l.trackObj.name)} · ${String(l.n).padStart(2, '0')}</span><h3>${esc(l.title)}</h3><p>${esc(l.summary)}</p><span class="card-meta">${esc(l.level)} · ${l.scenes.length} chapters · ${l.quiz.length}-question quiz</span></div></a>`;
 }
 const posterData = (lecs) => json(Object.fromEntries(lecs.map((l) => [l.slug, { scene: l.scenes[l.poster || 0], accent: l.accent }])));
 
 /* ---------- pages ---------- */
 function buildIndex(lecs) {
-  const pick = ['a-star-search', 'neural-networks-forward-pass', 'retrieval-augmented-generation', 'k-means-clustering', 'object-detection', 'tokenization-and-subwords', 'attention-and-transformers', 'convolution-and-image-filters', 'decoding-temperature-and-top-p', 'generative-adversarial-networks', 'principal-component-analysis', 'mixture-of-experts', 'backpropagation', 'image-segmentation'];
+  const pick = ['a-star-search', 'neural-networks-forward-pass', 'rl-foundations-mdps-and-returns', 'retrieval-augmented-generation', 'matrices-as-transformations', 'k-means-clustering', 'object-detection', 'inside-a-large-language-model', 'tokenization-and-subwords', 'monitoring-drift-and-retraining', 'attention-and-transformers', 'exploration-and-multi-armed-bandits', 'convolution-and-image-filters', 'probability-and-distributions', 'generative-adversarial-networks', 'llm-inference-engineering', 'principal-component-analysis', 'backpropagation'];
   const reel = { slug: 'showreel', title: 'Showreel', accent: '#a78bfa', scenes: pick.map((s) => lecs.find((l) => l.slug === s)).filter(Boolean).map((l) => Object.assign({}, l.scenes[l.poster || 1], { dur: 7, say: l.title + '.', accent: l.accent })) };
-  const total = lecs.reduce((a, l) => a + l.duration, 0);
+  const total = lecs.reduce((a, l) => a + l.duration, 0), deeps = lecs.filter((l) => l.deep);
   const body = `
 <section class="hero"><div class="wrap hero-grid">
 <div class="hero-copy">
-<p class="eyebrow"><span class="rec"></span>${lecs.length} animated lectures · ${Math.round(total / 60)} minutes of visual explanations</p>
+<p class="eyebrow"><span class="rec"></span>${lecs.length} animated lectures · ${deeps.length} deep dives · ${Math.round(total / 60)} minutes</p>
 <h1>See how AI <span class="grad">actually works.</span></h1>
-<p class="lead">${esc(SITE.tagline)} — every lesson is an animated video with narration, subtitles, chapters and a quick quiz. Understand in minutes what textbooks take chapters to explain.</p>
+<p class="lead">${esc(SITE.tagline)} — every lesson is an animated video with narration, subtitles, chapters and a quiz. Short lessons explain one idea in minutes; deep dives of ten minutes or more take you from intuition to the maths and the code.</p>
 <div class="cta"><a class="btn btn-glow" href="/watch/what-is-artificial-intelligence.html"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> Start watching</a><a class="btn btn-line" href="#library">Browse all lectures</a></div>
 <ul class="hero-feats"><li>🎙️ Voice narration</li><li>💬 Subtitles & transcripts</li><li>🧩 Chapters & quizzes</li><li>📚 Linked to ${SITE.blogName}</li></ul>
 </div>
@@ -128,16 +135,16 @@ function buildIndex(lecs) {
 </section>
 <section class="wrap sec"><div class="tracks">${TRACKS.map((t) => `<a class="track" href="/tracks/${t.id}.html" style="--a:${t.accent}"><span class="track-ic">${t.icon}</span><h3>${t.name}</h3><p>${esc(t.blurb)}</p><span class="track-n">${t.lectures.length} lectures · ${Math.round(t.lectures.reduce((a, l) => a + l.duration, 0) / 60)} min →</span></a>`).join('')}</div></section>
 <section class="wrap sec" id="library"><div class="sec-head"><span class="kicker">Library</span><h2>All animated lectures</h2></div>
-<div class="tools"><label class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="q" type="search" placeholder="Search lectures — try “attention”, “k-means” or “YOLO”" aria-label="Search lectures"></label>
-<div class="chips" id="chips"><button class="chip on" data-track="all">All <em>${lecs.length}</em></button>${TRACKS.map((t) => `<button class="chip" data-track="${t.id}" style="--a:${t.accent}">${t.short} <em>${t.lectures.length}</em></button>`).join('')}</div></div>
+<div class="tools"><label class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg><input id="q" type="search" placeholder="Search lectures — try “attention”, “Q-learning”, “drift” or “eigen”" aria-label="Search lectures"></label>
+<div class="chips" id="chips"><button class="chip on" data-track="all">All <em>${lecs.length}</em></button><button class="chip" data-track="deep" style="--a:#fbbf24">Deep dives <em>${deeps.length}</em></button>${TRACKS.map((t) => `<button class="chip" data-track="${t.id}" style="--a:${t.accent}">${t.short} <em>${t.lectures.length}</em></button>`).join('')}</div></div>
 <div class="grid" id="grid">${lecs.map(card).join('')}</div><p class="empty" id="empty" hidden>No lectures match your search.</p></section>
 <section class="wrap sec"><div class="how">
-<div><span class="kicker">How to learn here</span><h2>Watch, check, go deeper</h2><p class="lead">Each video explains one idea visually in a few minutes. Then test yourself with a three-question quiz, and continue with the in-depth written lectures in ${SITE.blogName}.</p></div>
+<div><span class="kicker">How to learn here</span><h2>Watch, check, go deeper</h2><p class="lead">Short videos explain one idea visually in a few minutes; deep dives spend ten minutes or more going from intuition to formulas, worked examples and code. Test yourself with the quiz, then continue with the in-depth written lectures in ${SITE.blogName}.</p></div>
 <ol class="steps"><li><b>Watch</b> the animation with narration — pause, rewind, jump by chapter or change speed.</li><li><b>Read</b> the transcript and key takeaways under every video.</li><li><b>Check</b> your understanding with the quiz.</li><li><b>Go deeper</b> with the linked university-level lectures.</li></ol>
 </div></section>
 <script type="application/json" id="poster-data">${posterData(lecs)}</script>`;
   const ld = { '@context': 'https://schema.org', '@type': 'Course', name: SITE.name, description: SITE.tagline, provider: { '@type': 'Person', name: SITE.author, url: SITE.portfolio }, hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'online', courseWorkload: `PT${Math.round(total / 60)}M` } };
-  writeFile('index.html', layout({ title: `${SITE.name} — Animated lectures on AI, ML, Deep Learning, Computer Vision, NLP & Generative AI`, desc: `${lecs.length} animated video lectures with narration, subtitles and quizzes on AI, machine learning, deep learning, computer vision, NLP and generative AI. By ${SITE.author}.`, body, extraHead: `<script type="application/ld+json">${json(ld)}</script>`, cls: 'home' }));
+  writeFile('index.html', layout({ title: `${SITE.name} — Animated lectures on AI, ML, Deep Learning, CV, NLP, GenAI, LLMs, RL, MLOps & Math`, desc: `${lecs.length} animated video lectures, including ${deeps.length} deep dives of 10+ minutes, with narration, subtitles and quizzes on AI, machine learning, deep learning, computer vision, NLP, generative AI, LLMs, reinforcement learning, MLOps and mathematics for ML. By ${SITE.author}.`, body, extraHead: `<script type="application/ld+json">${json(ld)}</script>`, cls: 'home' }));
 }
 
 function buildLecture(l) {
@@ -154,17 +161,17 @@ function buildLecture(l) {
 <div id="player" class="player-shell"></div>
 <noscript><p class="note">This animated lecture needs JavaScript. The full transcript is below.</p></noscript>
 <h1>${esc(l.title)}</h1>
-<p class="meta"><span class="pill" style="--a:${l.accent}">${esc(t.name)}</span><span>${esc(l.level)}</span><span>${fmt(l.duration)}</span><span>${l.scenes.length} chapters</span></p>
+<p class="meta"><span class="pill" style="--a:${l.accent}">${esc(t.name)}</span>${l.deep ? '<span class="pill deep-pill">Deep dive</span>' : ''}<span>${esc(l.level)}</span><span>${fmt(l.duration)}</span><span>${l.scenes.length} chapters</span></p>
 <p class="lead">${esc(l.summary)}</p>
 <div class="kbd-help muted small">Shortcuts: <kbd>Space</kbd> play/pause · <kbd>←</kbd>/<kbd>→</kbd> 5 s · <kbd>N</kbd>/<kbd>P</kbd> chapter · <kbd>M</kbd> voice · <kbd>C</kbd> subtitles · <kbd>F</kbd> fullscreen</div>
 </div>
 <aside class="side">
-<div class="panel"><h2>Chapters</h2><ol class="chapters">${chapters}</ol></div>
+<div class="panel"><h2>Chapters <small class="muted">${l.scenes.length}</small></h2><ol class="chapters${l.scenes.length > 12 ? ' scroll' : ''}">${chapters}</ol></div>
 <div class="panel"><h2>Key takeaways</h2><ul class="takeaways">${l.takeaways.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>
 </aside>
 </div>
 <div class="below">
-<section class="panel"><h2>Quick quiz</h2><p class="muted small">Three questions to check your understanding.</p><form class="quiz">${quiz}<div class="quiz-foot"><button type="submit" class="btn btn-glow">Check answers</button><span class="score" aria-live="polite"></span></div></form></section>
+<section class="panel"><h2>Quick quiz</h2><p class="muted small">${l.quiz.length} questions to check your understanding.</p><form class="quiz">${quiz}<div class="quiz-foot"><button type="submit" class="btn btn-glow">Check answers</button><span class="score" aria-live="polite"></span></div></form></section>
 <section class="panel"><h2>Go deeper</h2><p class="muted small">University-level written lectures in ${SITE.blogName}:</p><div class="reads">${reads}</div></section>
 </div>
 <details class="panel transcript"><summary><h2>Transcript</h2></summary>${transcript}</details>
@@ -184,8 +191,8 @@ function buildTrack(t) {
 
 function buildAbout(lecs) {
   const body = `<section class="wrap about"><span class="kicker">About</span><h1>Learn AI by <span class="grad">watching it work</span></h1>
-<p class="lead">${SITE.name} is a collection of ${lecs.length} animated lectures on artificial intelligence, machine learning, deep learning, computer vision, natural language processing and generative AI, created by <b>${esc(SITE.author)}</b> (${esc(SITE.credentials)}), currently ${esc(SITE.role)} at ${esc(SITE.org)}, teaching students.</p>
-<p>Every animation is drawn live in your browser from real computations: the search algorithms really search, gradient descent really descends, k-means really clusters and the convolutions really convolve. The numbers you see on screen are the numbers the algorithms produce.</p>
+<p class="lead">${SITE.name} is a collection of ${lecs.length} animated lectures, including ${lecs.filter((l) => l.deep).length} deep dives of ten minutes or more, on artificial intelligence, machine learning, deep learning, computer vision, natural language processing, generative AI, large language models, reinforcement learning, MLOps and the mathematics of machine learning, created by <b>${esc(SITE.author)}</b> (${esc(SITE.credentials)}), currently ${esc(SITE.role)} at ${esc(SITE.org)}, teaching students.</p>
+<p>Every animation is drawn live in your browser from real computations: the search algorithms really search, gradient descent really descends, k-means really clusters, the convolutions really convolve, Q-learning really learns and the Markov chains really converge. The numbers you see on screen are the numbers the algorithms produce.</p>
 <p>Each video has optional spoken narration (using your browser’s built-in voice), subtitles, chapters, a transcript, key takeaways and a short quiz. For the full theory — derivations, code and exercises — every lecture links to the matching chapters of <a href="${SITE.blog}" target="_blank" rel="noopener">${SITE.blogName}</a>, a free course of 273 written lectures by the same author.</p>
 <div class="cta"><a class="btn btn-glow" href="/watch/what-is-artificial-intelligence.html">▶ Start watching</a><a class="btn btn-line" href="${SITE.portfolio}" target="_blank" rel="noopener">Author portfolio ↗</a></div>
 <p class="muted small">${credit}</p></section>`;
@@ -197,7 +204,7 @@ function main() {
   fs.mkdirSync(OUT, { recursive: true }); clean(OUT);
   const lecs = load();
   copyDir(path.join(ROOT, 'public'), OUT);
-  const order = ['engine.js', 'kits/general.js', 'kits/ai.js', 'kits/ml.js', 'kits/dl.js', 'kits/cv.js', 'kits/nlp.js', 'kits/gen.js'];
+  const order = ['engine.js', 'kits/general.js', 'kits/ai.js', 'kits/ml.js', 'kits/dl.js', 'kits/cv.js', 'kits/nlp.js', 'kits/gen.js', 'kits/math.js', 'kits/rl.js', 'kits/llm.js', 'kits/mlops.js'];
   writeFile('assets/motion.js', '/* AI in Motion — © ' + YEAR + ' Janin A Apurba, CSE, AUST */\n' + order.map((f) => fs.readFileSync(path.join(ROOT, 'src', f), 'utf8')).join('\n'));
   ['site.js', 'style.css'].forEach((f) => writeFile('assets/' + f, fs.readFileSync(path.join(ROOT, 'src', f), 'utf8')));
   fs.copyFileSync(path.join(ROOT, 'src', 'favicon.svg'), path.join(OUT, 'favicon.svg'));

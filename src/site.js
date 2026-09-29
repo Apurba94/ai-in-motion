@@ -16,7 +16,8 @@
   if (lec && shell && M) {
     var player = new M.Player(shell, lec);
     var chapterBtns = $$('.chapters button');
-    shell.addEventListener('mv-scene', function (e) { chapterBtns.forEach(function (b, i) { b.classList.toggle('on', i === e.detail.index); }); });
+    var chapList = $('.chapters');
+    shell.addEventListener('mv-scene', function (e) { chapterBtns.forEach(function (b, i) { b.classList.toggle('on', i === e.detail.index); }); var on = chapterBtns[e.detail.index]; if (on && chapList && chapList.scrollHeight > chapList.clientHeight) { var li = on.parentNode; chapList.scrollTo({ top: Math.max(0, li.offsetTop - chapList.offsetTop - chapList.clientHeight / 2 + li.offsetHeight / 2), behavior: reduced ? 'auto' : 'smooth' }); } });
     $$('[data-seek]').forEach(function (b) { b.addEventListener('click', function () { player.seekScene(+b.dataset.seek); shell.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' }); shell.focus({ preventScroll: true }); }); });
     shell.addEventListener('mv-ended', function () {
       var stage = $('.mv-stage', shell), next = $('.pn .next'); if (!stage || $('.mv-end', stage)) return;
@@ -72,7 +73,7 @@
     var track = 'all';
     var apply = function () {
       var terms = (q ? q.value : '').toLowerCase().split(/\s+/).filter(Boolean), shown = 0;
-      $$('.card', grid).forEach(function (c) { var ok = (track === 'all' || c.dataset.track === track) && terms.every(function (t) { return c.dataset.q.indexOf(t) !== -1; }); c.hidden = !ok; if (ok) shown++; });
+      $$('.card', grid).forEach(function (c) { var ok = (track === 'all' || c.dataset.track === track || (track === 'deep' && c.dataset.deep === '1')) && terms.every(function (t) { return c.dataset.q.indexOf(t) !== -1; }); c.hidden = !ok; if (ok) shown++; });
       $('#empty').hidden = shown > 0;
     };
     if (q) q.addEventListener('input', apply);

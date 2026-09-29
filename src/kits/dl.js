@@ -123,7 +123,7 @@
           if (shown) { var hgt = Math.max(2, mag * 90); g.box(x + 24, y + 44, 40, hgt, { r: 5, fill: row[2], glow: row[2], blur: 8, alpha: a }); g.text(mag < .001 ? mag.toExponential(0) : mag.toFixed(3), x + 44, y + 58 + hgt + 10, { size: 14, mono: true, color: g.C.muted, align: 'center', alpha: a }); }
         }
       });
-      g.text('gradient size reaching each layer (flowing backward ←)', 640, 170, { size: 18, color: g.C.muted, align: 'center', alpha: g.seg(p, .1, .2) });
+      g.text('gradient size reaching each layer (flowing backward ←)', 640, 694, { size: 18, color: g.C.muted, align: 'center', alpha: g.seg(p, .1, .2) });
     }
   });
 
